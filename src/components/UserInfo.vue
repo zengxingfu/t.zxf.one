@@ -8,7 +8,12 @@
                     </figure>
                 </div>
                 <div class="media-content">
-                    <p class="user-name">Anonymous <span class="user-option">>Sign In</span></p>
+                    <p class="user-name">{{nickname}} 
+                        <span class="user-option">
+                            <a v-if="isLogin" @click="logout">> 退出</a>
+                            <a v-else @click="login">> 登录</a>
+                        </span>
+                    </p>
                     <p class="subtitle is-6 user-welcome">Huānyíng nǐ, yě bù huānyíng nǐ.</p>
                 </div>
             </div>
@@ -17,27 +22,45 @@
 </template>
 
 <script>
-    export default {
-        data() {
-            return {
-                avatar:
-                    "http://www.gravatar.com/avatar/c54fffec6620d02feb803fe47d462221?d=retro"
-            };
-        }
-    };
+export default {
+  props: {
+    isLogin: Boolean,
+    nickname: String,
+    avatar: String
+  },
+  data() {
+    return {};
+  },
+  methods: {
+    login() {
+      this.$router.push("/login");
+    },
+    logout() {
+      localStorage.removeItem("access_token");
+      this.$setCookie("isLogin", "0");
+      window.location.reload();
+    }
+  }
+};
 </script>
 
 <style scoped>
-    .card {
-        background-color: #fff6ed;
-    }
+.card {
+  background-color: #fff6ed;
+}
 
-    .user-option {
-        float: right;
-    }
-
-    .user-welcome {
-        font-size: 0.875em;
-        color: #999999;
-    }
+.user-option {
+  float: right;
+}
+.user-option a {
+  color: #4a4a4a;
+}
+.user-option a:hover {
+  color: black;
+  text-decoration: underline;
+}
+.user-welcome {
+  font-size: 0.875em;
+  color: #999999;
+}
 </style>

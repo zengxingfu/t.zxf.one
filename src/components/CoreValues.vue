@@ -1,6 +1,6 @@
 <template>
-    <div class="core-values">
-        <div class="card">
+    <div>
+        <div class="card core-values">
             <div class="card-content">
                 富强 民主 文明 和谐
                 <br>
@@ -10,11 +10,20 @@
                 <br>
             </div>
         </div>
+        <div class="nav-link">
+            <a v-if="father ==='home' " href="#">> 为什么是“小广播”？</a>
+            <a v-else href="#">> 返回曾高兴的全部广播</a>
+        </div>
+        <div class="mailme">
+            <a target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=eREcFRUWOQMBH1cWFxw" style="text-decoration:none;"><img src="http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_01.png"/></a>
+        </div>
     </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: ["father"]
+};
 </script>
 
 <style scoped>
@@ -22,7 +31,19 @@ export default {};
   margin-top: 20px;
   text-align: center;
   font-size: 0.875em;
-  letter-spacing: 1.5em;
+  letter-spacing: 0.875em;
   font-weight: 100;
+}
+
+.nav-link {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.nav-link a {
+  color: #222222;
+}
+.nav-link a:hover {
+  color: black;
+  text-decoration: underline;
 }
 </style>

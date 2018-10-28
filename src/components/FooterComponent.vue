@@ -2,6 +2,7 @@
     <footer class="footer">
       <div class="content">
         <p class="container">
+          <br>
             © 2011 – 2018  曾星富 <br>
             Powered by <a href="https://github.com/zengxingfu/tiny-tweet">Tiny Tweet</a>
         </p>
@@ -15,17 +16,24 @@ export default {};
 
 <style scoped>
 .footer {
-  margin-top: 100px;
+  /* margin-top: 100px; */
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  background-color: transparent;
 }
 .footer p {
   font-size: 0.875em;
 }
 .footer a {
+  font-weight: 600;
   color: #4a4a4a;
 }
 .footer a:hover {
   text-decoration: underline;
   /* color: black; */
-  font-weight: 400;
+}
+.footer .container {
+  border-top: 1px solid rgba(0, 0, 0, 0.125);
 }
 </style>

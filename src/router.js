@@ -6,8 +6,7 @@ import Detail from "./view/Detail.vue";
 Vue.use(VueRouter);
 
 const router = new VueRouter({
-  routes: [
-    {
+  routes: [{
       path: "/login",
       component: Login
     },
