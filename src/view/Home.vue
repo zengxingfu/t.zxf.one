@@ -1,11 +1,16 @@
 <template>
     <div>
-        yahaha
+        <tweet ></tweet>
     </div>
 </template>
 
 <script>
-export default {};
+import Tweet from "../components/Tweet";
+export default {
+  components: {
+    Tweet
+  }
+};
 </script>
 
 <style scoped>

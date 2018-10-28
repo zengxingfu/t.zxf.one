@@ -2,6 +2,7 @@
   <div class="page-wrapper">
     <Navbar></Navbar>
     <Hero></Hero>
+    <section class="section">
     <div class="container">
       <div class="columns">
         <div class="column is-two-thirds">
@@ -17,6 +18,7 @@
         </div>
       </div>
     </div>
+    </section>
     <footer-component></footer-component>
   </div>
 </template>
@@ -51,11 +53,13 @@ export default {
         if (result.data.success === 1) {
           if (result.data.data.type === "host") {
             vm.isLogin = true;
+            vm.$emit("logged in", result.data.data);
             vm.$setCookie("isLogin", "1");
           }
           vm.nickname = result.data.data.nickname;
           vm.avatar = result.data.data.avatar + "?d=retro";
-          vm.$emit("login statut changed", vm.isLogin);
+          localStorage.setItem("nickname", nickname);
+          localStorage.setItem("avatar", avatar);
         }
       })
       .catch(err => {
