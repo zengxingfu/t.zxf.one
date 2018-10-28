@@ -11,8 +11,8 @@
             </div>
         </div>
         <div class="nav-link">
-            <a v-if="father ==='home' " href="#">> 为什么是“小广播”？</a>
-            <a v-else href="#">> 返回曾高兴的全部广播</a>
+            <a v-if="$route.path ==='/' " href="#">> 为什么是“小广播”？</a>
+            <a v-else @click="$router.push('/')">> 返回曾高兴的全部广播</a>
         </div>
         <div class="mailme">
             <a target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=eREcFRUWOQMBH1cWFxw" style="text-decoration:none;"><img src="http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_01.png"/></a>
@@ -21,9 +21,7 @@
 </template>
 
 <script>
-export default {
-  props: ["father"]
-};
+export default {};
 </script>
 
 <style scoped>

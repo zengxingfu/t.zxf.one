@@ -4,17 +4,17 @@
             <div class="media">
                 <div class="media-left">
                     <figure class="image is-48x48">
-                        <img :src="avatar" alt="Placeholder image">
+                        <img :src="$store.state.user.avatar + '?d=retro'" alt="Placeholder image">
                     </figure>
                 </div>
                 <div class="media-content">
-                    <p class="user-name">{{nickname}} 
+                    <p class="user-name">{{$store.state.user.nickname}} 
                         <span class="user-option">
-                            <a v-if="isLogin" @click="logout">> 退出</a>
+                            <a v-if="$store.state.isLogin" @click="logout">> 退出</a>
                             <a v-else @click="login">> 登录</a>
                         </span>
                     </p>
-                    <p class="subtitle is-6 user-welcome">Huānyíng nǐ, yě bù huānyíng nǐ.</p>
+                    <p class="subtitle is-6 user-welcome"><small>欢迎你，也不欢迎。</small></p>
                 </div>
             </div>
         </div>
@@ -23,11 +23,6 @@
 
 <script>
 export default {
-  props: {
-    isLogin: Boolean,
-    nickname: String,
-    avatar: String
-  },
   data() {
     return {};
   },
@@ -37,7 +32,6 @@ export default {
     },
     logout() {
       localStorage.removeItem("access_token");
-      this.$setCookie("isLogin", "0");
       window.location.reload();
     }
   }

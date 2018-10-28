@@ -7,9 +7,8 @@
 <script>
 import LoginForm from "../components/LoginForm";
 export default {
-  created() {
-    const isLogin = this.$getCookie("isLogin");
-    if (isLogin === "1") {
+  beforeMount() {
+    if (this.$store.state.isLogin) {
       this.$router.push("/");
     }
   },

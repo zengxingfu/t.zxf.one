@@ -19,7 +19,6 @@ export default {};
   /* margin-top: 100px; */
   /* position: fixed;
   bottom: 0; */
-  width: 100vw;
   background-color: transparent;
 }
 .footer p {

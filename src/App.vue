@@ -5,16 +5,12 @@
     <section class="section">
     <div class="container">
       <div class="columns">
-        <div class="column is-two-thirds">
+        <div class="column is-8">
           <router-view></router-view>
         </div>
-        <div class="column is-one-thirds">
-          <user-info
-            :is-login="isLogin"
-            :nickname="nickname"
-            :avatar="avatar"
-          ></user-info>
-          <core-values father="home"></core-values>
+        <div class="column is-3 is-offset-1">
+          <user-info></user-info>
+          <core-values></core-values>
         </div>
       </div>
     </div>
@@ -39,12 +35,7 @@ export default {
     CoreValues
   },
   data() {
-    return {
-      isLogin: false,
-      nickname: "",
-      avatar: "",
-      email: ""
-    };
+    return {};
   },
   beforeCreate() {
     const vm = this;
@@ -52,14 +43,10 @@ export default {
       .then(result => {
         if (result.data.success === 1) {
           if (result.data.data.type === "host") {
-            vm.isLogin = true;
-            vm.$emit("logged in", result.data.data);
-            vm.$setCookie("isLogin", "1");
+            vm.$store.commit("setIsLogin", true);
           }
-          vm.nickname = result.data.data.nickname;
-          vm.avatar = result.data.data.avatar + "?d=retro";
-          localStorage.setItem("nickname", nickname);
-          localStorage.setItem("avatar", avatar);
+          vm.$store.commit("setUser", result.data.data.user);
+          vm.$store.commit("setHost", result.data.data.host);
         }
       })
       .catch(err => {
