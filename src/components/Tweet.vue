@@ -28,7 +28,7 @@
     </div>
     <nav class="level is-mobile">
       <div class="level-left">
-        <a @click="$router.push(`/detail/${_id}`)" class="level-item created_at">{{tweet.created_at}}</a>
+        <a @click="handleCreatedAt" class="level-item created_at">{{tweet.created_at}}</a>
         <a @click="handleReply" class="level-item replies">{{tweet.replies === 0 ? '' : tweet.replies}} 回应</a>
         <a @click="handleLike" v-bind:class="{'disabled': tweet.liked}" class="level-item likes"><span>赞 {{tweet.likes === 0 ? '' : `(${tweet.likes})`}}</span></a>
         <a @click="handleRetweet" class="level-item retweets"><span>转发 {{tweet.retweets === 0 ? '' : `(${tweet.retweets})`}}</span></a>
@@ -231,6 +231,10 @@ export default {
           alert("你为什么想要转发呢？");
         }
       }
+    },
+    handleCreatedAt() {
+      $router.push(`/detail/${_id}`);
+      window.scrollTo(0, 0);
     }
   }
 };
