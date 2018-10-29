@@ -10,7 +10,7 @@
                 <div class="media-content">
                     <p class="user-name">{{$store.state.user.nickname}} 
                         <span class="user-option">
-                            <a v-if="!$store.state.isLogin" @click="$router.push('/register')">> 访客登记</a>
+                            <a v-if="!$store.state.isLogin" @click="goRegister">> 访客登记</a>
                         </span>
                     </p>
                     <p class="subtitle is-6 user-welcome"><small>欢迎你，也不欢迎。</small></p>
@@ -25,7 +25,12 @@ export default {
   data() {
     return {};
   },
-  methods: {}
+  methods: {
+    goRegister() {
+      this.$router.push("/register");
+      window.scrollTo(0, 0);
+    }
+  }
 };
 </script>
 
