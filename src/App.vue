@@ -39,7 +39,12 @@ export default {
   },
   beforeCreate() {
     const vm = this;
-    vm.$request("/welcome")
+    const nickname = localStorage.getItem("nickname");
+    const email = localStorage.getItem("email");
+    const url = `/welcome?nickname=${nickname ? nickname : ""}&email=${
+      email ? email : ""
+    }`;
+    vm.$request(url)
       .then(result => {
         if (result.data.success === 1) {
           if (result.data.data.type === "host") {

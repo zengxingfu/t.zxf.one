@@ -2,18 +2,9 @@
     <div class="tweets-container">
 
       <tweet-input v-if="$store.state.isLogin" class="tweet-input"></tweet-input>
-      <div v-for="tweet in tweets" :key="tweet.id">
+      <div v-for="item in tweets" :key="item._id">
         <tweet
-          :_id="tweet._id"
-          :content="tweet.content"
-          :created_at="tweet.created_at"
-          :replies="tweet.replies"
-          :likes="tweet.likes"
-          :retweets="tweet.retweets"
-          :image="tweet.image"
-          :type="tweet.type"
-          :origin="tweet.origin?tweet.origin:{}"
-          :liked="tweet.liked"
+          :_id="item._id"
         ></tweet>
       </div>
       <pagination
@@ -30,6 +21,7 @@ import Pagination from "../components/Pagination.vue";
 import TweetInput from "../components/TweetInput";
 import Bus from "../bus.js";
 export default {
+  name: "Home",
   components: {
     Tweet,
     Pagination,
@@ -40,7 +32,7 @@ export default {
     return {
       limit: 10,
       count: 0,
-      tweets: []
+      tweets: {}
     };
   },
   computed: {
@@ -55,6 +47,11 @@ export default {
     Bus.$on("reload", data => {
       vm.fetchData();
     });
+    // Bus.$on("has-liked", id => {
+    //   this.tweets[id].likes += 1;
+    //   this.tweets[id].liked = true;
+    // });
+
     // Bus.$on("change-page", data => {
     //   vm.page = data;
     //   vm.fetchData();
@@ -73,19 +70,8 @@ export default {
           }
         })
         .then(result => {
-          // console.log(result.data);
           this.count = result.data.count;
-          this.tweets = result.data.list.map(tweet => {
-            let likedList = localStorage.getItem("likedList");
-            if (likedList) {
-              likedList = JSON.parse(likedList);
-              if (likedList.indexOf(tweet._id) >= 0) {
-                tweet.liked = true;
-              }
-            }
-            tweet.created_at = this.$dayjs(tweet.created_at * 1000).fromNow();
-            return tweet;
-          });
+          this.tweets = result.data.list;
           window.scrollTo(0, 0);
         })
         .catch(err => {

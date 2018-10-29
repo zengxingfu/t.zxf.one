@@ -12,7 +12,7 @@
         </div>
         <div class="nav-link">
             <a v-if="$route.name ==='tweets' ">> 为什么是“小广播”？</a>
-            <a v-else @click="$router.push('/')">> 返回曾高兴的全部广播</a>
+            <a v-else @click="$router.back()">> 返回曾高兴的全部广播</a>
         </div>
         <div class="nav-link">
             <a v-if="!$store.state.isLogin" @click="login">> 登录</a>

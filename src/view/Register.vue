@@ -48,6 +48,9 @@ export default {
         email: this.email,
         avatar: null
       });
+      localStorage.setItem("nickname", this.nickname);
+      localStorage.setItem("email", this.email);
+      this.$router.push("/");
     }
   }
 };
