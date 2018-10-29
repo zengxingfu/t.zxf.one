@@ -2,7 +2,7 @@
 <section class="hero is-medium">
   <div class="hero-body">
     <div class="container">
-      <span class="title">小广播</span><br><br>
+      <span @click="$router.push('/')" class="title">小广播</span><br><br>
       <span class="subtitle">中国有一句话叫「闷声大发财」，我就什么话也不说，这是最好的！</span>
     </div>
   </div>
@@ -14,12 +14,17 @@ export default {};
 </script>
 
 <style scoped>
+@media screen and (max-width: 768px) {
+  .container {
+    text-align: center;
+  }
+}
 .title {
   color: white;
   background: #222222;
-  font-weight: 300;
+  font-weight: 400;
   padding: 10px 20px 10px 20px;
-  font-size: 1.5em;
+  font-size: 1em;
   cursor: pointer;
 }
 .subtitle {

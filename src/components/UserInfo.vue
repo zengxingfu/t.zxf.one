@@ -10,8 +10,7 @@
                 <div class="media-content">
                     <p class="user-name">{{$store.state.user.nickname}} 
                         <span class="user-option">
-                            <a v-if="$store.state.isLogin" @click="logout">> 退出</a>
-                            <a v-else @click="login">> 登录</a>
+                            <a v-if="!$store.state.isLogin" @click="$router.push('/register')">> 访客登记</a>
                         </span>
                     </p>
                     <p class="subtitle is-6 user-welcome"><small>欢迎你，也不欢迎。</small></p>
@@ -26,19 +25,14 @@ export default {
   data() {
     return {};
   },
-  methods: {
-    login() {
-      this.$router.push("/login");
-    },
-    logout() {
-      localStorage.removeItem("access_token");
-      window.location.reload();
-    }
-  }
+  methods: {}
 };
 </script>
 
 <style scoped>
+.media {
+  border-bottom: 0;
+}
 .card {
   background-color: #fff6ed;
 }

@@ -6,23 +6,35 @@ const store = new Vuex.Store({
     state: {
         host: {
             nickname: '',
-            avatar: ''
+            avatar: '',
+            email: ''
         },
         user: {
             nickname: '',
-            avatar: ''
+            avatar: '',
+            email: ''
         },
-        isLogin: false
+        isLogin: false,
+        page: 1
     },
     mutations: {
         setHost(state, host) {
             state.host = host
         },
         setUser(state, user) {
-            state.user = user
+            // state.user = user
+            if (user.nickname) state.user.nickname = user.nickname
+            if (user.email) state.user.email = user.email
+            if (user.avatar) state.user.avatar = user.avatar
         },
         setIsLogin(state, isLogin) {
             state.isLogin = isLogin
+        },
+        setPage(state, pageNumber) {
+            state.page = pageNumber
+        },
+        resetPage(state) {
+            state.page = 1
         }
     }
 })

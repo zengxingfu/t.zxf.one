@@ -2,7 +2,7 @@
   <div class="navbar">
     <div class="nav-link">
       <!-- <span class="icon"><i class="fas fa-chevron-left"></i></span> -->
-      <a href="https://zxf.one"> 👈学习一个</a>
+      <a href="https://zxf.one"> ← 学习一个</a>
     </div>
   </div>
 </template>

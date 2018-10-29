@@ -3,7 +3,7 @@
     <label class="label">💬 说句话</label>
     <div class="control">
       <!-- <input class="input" type="text" placeholder="Text input"> -->
-      <textarea v-on:blur="onblurInput" v-on:focus="onfocusInput" :rows="rows" class="textarea" placeholder="e.g. Hello world"></textarea>
+      <textarea v-model="payload.content" v-on:blur="onblurInput" v-on:focus="onfocusInput" :rows="rows" class="textarea" placeholder="e.g. Hello world"></textarea>
     </div>
 <div v-show="!hideButton" class="field is-grouped is-grouped-right">
       <p class="control">
@@ -11,21 +11,18 @@
           <label class="file-label">
             <input class="file-input" type="file" name="resume">
             <span class="file-cta">
-              <span class="file-icon">
-                <i class="fas fa-upload"></i>
-              </span>
               <span class="file-label">
-                上传照片
+                🌄 上传照片
               </span>
             </span>
             <span class="file-name">
-              🌇
+              image file
             </span>
           </label>
         </div>
       </p>
       <p class="control">
-        <a class="button is-light">
+        <a :disabled="payload.content.length === 0" class="button is-light" v-bind:class="{'is-loading': publishing}" @click="publish">
           📌 发布
         </a>
       </p>
@@ -34,11 +31,17 @@
 </template>
 
 <script>
+import Bus from "../bus.js";
 export default {
   data() {
     return {
       rows: 1,
-      hideButton: true
+      hideButton: true,
+      publishing: false,
+      payload: {
+        content: "",
+        image: ""
+      }
     };
   },
   methods: {
@@ -47,8 +50,31 @@ export default {
       this.hideButton = false;
     },
     onblurInput() {
-      this.rows = 1;
-      this.hideButton = true;
+      if (this.payload.content.length === 0) {
+        this.rows = 1;
+        this.hideButton = true;
+      }
+    },
+    publish() {
+      const vm = this;
+      vm.publishing = true;
+      const params = new URLSearchParams();
+      params.append("content", vm.payload.content);
+      params.append("image", vm.payload.image);
+      vm.$request
+        .post("/tweet", params)
+        .then(result => {
+          if (result.data.success === 1) {
+            Bus.$emit("reload");
+            vm.payload.content = "";
+            vm.payload.image = "";
+            vm.publishing = false;
+          }
+        })
+        .catch(err => {
+          vm.publishing = false;
+          console.log(err);
+        });
     }
   }
 };

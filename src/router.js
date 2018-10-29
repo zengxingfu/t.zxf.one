@@ -3,20 +3,37 @@ import VueRouter from "vue-router";
 import Login from "./view/Login.vue";
 import Home from "./view/Home.vue";
 import Detail from "./view/Detail.vue";
+import Register from "./view/Register.vue";
 Vue.use(VueRouter);
 
 const router = new VueRouter({
   routes: [{
+      path: '/',
+      redirect: '/page/1'
+    },
+    {
+      path: '/page',
+      redirect: '/page/1'
+    },
+    {
+      name: 'login',
       path: "/login",
       component: Login
     },
     {
-      path: "/",
+      name: 'tweets',
+      path: "/page/:page",
       component: Home
     },
     {
-      path: "/detail",
+      name: 'detail',
+      path: "/detail/:id",
       component: Detail
+    },
+    {
+      name: 'register',
+      path: "/register",
+      component: Register
     }
   ]
 });

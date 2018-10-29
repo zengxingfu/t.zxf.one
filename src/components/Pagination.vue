@@ -1,24 +1,34 @@
 <template>
   <div class="paginator">
     <span class="prev">
-      <a v-bind:class="{'disabled': isFirst}" class="page-number">
+      <a v-if="!isFirst" class="page-number" @click="changePage(-1, null)">
+        &lt;前页
+      </a>
+      <a v-else class="page-number disabled">
         &lt;前页
       </a>
     </span>
-
-    <a v-bind:class="{'thispage': page === pageNumber}" class="page-number" v-for="pageNumber in TotalPageList[groupIndex]" :key="pageNumber">&nbsp;{{pageNumber}}&nbsp;</a>
+    <a
+     v-bind:class="{'thispage': page === pageNumber}"
+     class="page-number"
+     v-for="pageNumber in TotalPageList[groupIndex]"
+     :key="pageNumber"
+     @click="changePage(0, pageNumber)"
+     >&nbsp;{{pageNumber}}&nbsp;</a>
     <!-- <span class="thispage">1</span>
     <a href="?p=2">2</a>
     <a href="?p=3">3</a> -->
     <span v-if="groupIndex < TotalPageList.length - 1" class="break">...</span>
     <span class="next">
-      <a v-bind:class="{'disabled': isLast}" class="page-number">后页&gt;</a>
+      <a v-if="!isLast" class="page-number" @click="changePage(1, null)">后页&gt;</a>
+      <a v-else class="page-number disabled">后页&gt;</a>
     </span>
 
   </div>
 </template>
 
 <script>
+import Bus from "../bus.js";
 export default {
   data() {
     return {
@@ -54,7 +64,19 @@ export default {
   },
   props: ["count", "limit", "page"],
   created() {},
-  methods: {}
+  methods: {
+    changePage(add, changeTo) {
+      if (changeTo) {
+        if (changeTo !== this.page) {
+          this.$router.push(`/page/${changeTo}`);
+          Bus.$emit("reload");
+        }
+      } else {
+        this.$router.push(`/page/${this.page + add}`);
+        Bus.$emit("reload");
+      }
+    }
+  }
 };
 </script>
 
@@ -62,7 +84,7 @@ export default {
 .paginator {
   padding-top: 40px;
   text-align: center;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .prev {
