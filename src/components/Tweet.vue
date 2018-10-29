@@ -233,7 +233,7 @@ export default {
       }
     },
     handleCreatedAt() {
-      this.$router.push(`/detail/${_id}`);
+      this.$router.push(`/detail/${this._id}`);
       window.scrollTo(0, 0);
     }
   }
