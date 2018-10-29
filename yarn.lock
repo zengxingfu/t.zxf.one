@@ -3501,6 +3501,10 @@ q@^1.1.2:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/q/-/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
 
+qiniu-js@^2.5.1:
+  version "2.5.1"
+  resolved "http://registry.npm.taobao.org/qiniu-js/download/qiniu-js-2.5.1.tgz#c7b6c8d92c5d0f4605386abfd9ff7bc19ed93981"
+
 query-string@^4.1.0:
   version "4.3.4"
   resolved "https://registry.yarnpkg.com/query-string/-/query-string-4.3.4.tgz#bbb693b9ca915c232515b228b1a02b609043dbeb"

@@ -1,11 +1,13 @@
 {
   "scripts": {
-    "start": "parcel index.html"
+    "start": "parcel index.html",
+    "build": "parcel build index.html --public-url ./"
   },
   "dependencies": {
     "axios": "^0.18.0",
     "bulma": "^0.7.2",
     "dayjs": "^1.7.7",
+    "qiniu-js": "^2.5.1",
     "vue": "^2.5.10",
     "vue-hot-reload-api": "^2.3.1",
     "vue-router": "^3.0.1",
