@@ -29,6 +29,7 @@ export default {
   methods: {
     login() {
       this.$router.push("/login");
+      window.scrollTo(0, 0);
     },
     logout() {
       this.$store.commit("setIsLogin", false);
