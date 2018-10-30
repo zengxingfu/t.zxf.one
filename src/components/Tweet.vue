@@ -32,6 +32,7 @@
         <a @click="handleReply" class="level-item replies">{{tweet.replies === 0 ? '' : tweet.replies}} 回应</a>
         <a @click="handleLike" v-bind:class="{'disabled': tweet.liked}" class="level-item likes"><span>赞 {{tweet.likes === 0 ? '' : `(${tweet.likes})`}}</span></a>
         <a @click="handleRetweet" class="level-item retweets"><span>转发 {{tweet.retweets === 0 ? '' : `(${tweet.retweets})`}}</span></a>
+        <a v-if="$store.state.isLogin" @click="handleDelete" class="level-item delete-tweet"><span>删除</span></a>
       </div>
     </nav>
     <!-- 回应列表 -->
@@ -235,6 +236,21 @@ export default {
     handleCreatedAt() {
       this.$router.push(`/detail/${this._id}`);
       window.scrollTo(0, 0);
+    },
+    handleDelete() {
+      if (confirm("删除这条广播？")) {
+        this.$request
+          .delete(`/tweet/${this._id}`)
+          .then(res => {
+            if (res.data.success === 1) {
+              window.location.reload();
+            }
+          })
+          .catch(err => {
+            console.log(err);
+            alert(err);
+          });
+      }
     }
   }
 };
@@ -304,5 +320,12 @@ a.created_at:hover {
 .quick-reply {
   padding-top: 5px;
   /* width: 50%; */
+}
+.delete-tweet {
+  color: #ec6149 !important;
+}
+.delete-tweet:hover {
+  color: white !important;
+  background: #ec6149 !important;
 }
 </style>

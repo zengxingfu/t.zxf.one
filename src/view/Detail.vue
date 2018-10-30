@@ -10,6 +10,7 @@
           :content="item.content"
           :created_at="item.created_at"
           :avatar="item.avatar"
+          :_id="item._id"
         ></reply>
       </div>
       <!-- 你的回应 -->
@@ -32,7 +33,9 @@ export default {
     return {
       showModal: false,
       replies: [],
-      replyCount: 0
+      replyCount: 0,
+      replyLimit: 100,
+      replyPage: 1
     };
   },
   created() {
@@ -42,7 +45,14 @@ export default {
     fetchReplies(id) {
       const vm = this;
       this.$request
-        .get("/tweet/" + id + "/reply")
+        .get(
+          "/tweet/" +
+            id +
+            "/reply?limit=" +
+            this.replyLimit +
+            "&page=" +
+            this.replyPage
+        )
         .then(result => {
           if (result.data.success === 1) {
             vm.replies = result.data.list.map(reply => {

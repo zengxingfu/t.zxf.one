@@ -8,6 +8,7 @@
         ></tweet>
       </div>
       <pagination
+        v-show="count>limit"
         :count="count"
         :limit="limit"
         :page="page"

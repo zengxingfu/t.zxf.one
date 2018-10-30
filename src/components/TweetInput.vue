@@ -65,10 +65,11 @@ export default {
         .post("/tweet", params)
         .then(result => {
           if (result.data.success === 1) {
-            Bus.$emit("reload");
             vm.payload.content = "";
             vm.payload.image = "";
             vm.publishing = false;
+            Bus.$emit("reload");
+            vm.$router.push("/");
           }
         })
         .catch(err => {

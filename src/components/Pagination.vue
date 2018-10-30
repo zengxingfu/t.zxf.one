@@ -86,6 +86,9 @@ export default {
   text-align: center;
   font-weight: 400;
 }
+.paginator span a {
+  font-size: 0.875em;
+}
 
 .prev {
   margin-right: 20px;
