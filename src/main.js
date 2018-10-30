@@ -1,11 +1,11 @@
-'use strict'
+"use strict";
 
 import Vue from "vue";
-import Vuex from 'vuex';
+import Vuex from "vuex";
 import app from "./App.vue";
 import axios from "axios";
 import router from "./router";
-import store from './store'
+import store from "./store";
 import "./assets/mystyle.sass";
 
 // dayjs
@@ -17,9 +17,11 @@ dayjs.extend(relativeTime);
 Vue.prototype.$dayjs = dayjs;
 
 const request = axios.create({
-  baseURL: 'https://tiny-tweet.zengxingfu.com'
+  baseURL: "https://tiny-tweet.zengxingfu.com"
 });
-request.defaults.headers.common['Authorization'] = localStorage.getItem('access_token')
+request.defaults.headers.common["Authorization"] = localStorage.getItem(
+  "access_token"
+);
 
 Vue.prototype.$request = request;
 // Vue.prototype.$setCookie = function (name, value) {

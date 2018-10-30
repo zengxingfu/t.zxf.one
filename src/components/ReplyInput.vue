@@ -21,6 +21,7 @@ export default {
       replyInput: ""
     };
   },
+  props: ["tweet_id"],
   methods: {
     publish() {
       if (this.replyInput.length > 0) {
@@ -35,6 +36,7 @@ export default {
           .then(res => {
             if (res.data.success === 1) {
               // vm.fetchReplies();
+              this.$router.push("/detail/" + this.tweet_id);
               window.location.reload();
             }
           })

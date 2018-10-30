@@ -1,5 +1,5 @@
 <template>
-<article class="media">
+<article v-on:mouseleave="mouseEnter=false" v-on:mouseenter="mouseEnter=true" class="media">
   <figure class="media-left">
     <p class="image is-48x48">
       <img :src="$store.state.host.avatar">
@@ -88,12 +88,14 @@ export default {
   },
   data() {
     return {
+      mouseEnter: false,
       tweet: {},
       showModal: false,
       reply: {
         list: [],
         status: false,
-        quickInput: ""
+        quickInput: "",
+        requested: false
       },
       retweet: {
         quickInput: "",
@@ -155,12 +157,13 @@ export default {
     },
     handleReply() {
       const vm = this;
-      if (vm.reply.list.length === 0) {
+      if (!vm.reply.requested) {
         this.$request
           .get(`/tweet/${vm._id}/reply`)
           .then(res => {
             if (res.data.success === 1) {
               vm.reply.list = res.data.list;
+              vm.reply.requested = true;
             }
           })
           .catch(err => {
@@ -243,7 +246,11 @@ export default {
           .delete(`/tweet/${this._id}`)
           .then(res => {
             if (res.data.success === 1) {
-              window.location.reload();
+              if (this.$route.name === "detail") {
+                this.$router.back();
+              } else {
+                window.location.reload();
+              }
             }
           })
           .catch(err => {

@@ -11,10 +11,11 @@
           :created_at="item.created_at"
           :avatar="item.avatar"
           :_id="item._id"
+          :tweet_id="$route.params.id"
         ></reply>
       </div>
       <!-- 你的回应 -->
-      <reply-input class="reply-input"></reply-input>
+      <reply-input :tweet_id="$route.params.id" class="reply-input"></reply-input>
   </div>
 </template>
 
