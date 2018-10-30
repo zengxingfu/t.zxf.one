@@ -56,26 +56,28 @@ export default {
       }
     },
     publish() {
-      const vm = this;
-      vm.publishing = true;
-      const params = new URLSearchParams();
-      params.append("content", vm.payload.content);
-      params.append("image", vm.payload.image);
-      vm.$request
-        .post("/tweet", params)
-        .then(result => {
-          if (result.data.success === 1) {
-            vm.payload.content = "";
-            vm.payload.image = "";
+      if (this.payload.content.length > 0) {
+        const vm = this;
+        vm.publishing = true;
+        const params = new URLSearchParams();
+        params.append("content", vm.payload.content);
+        params.append("image", vm.payload.image);
+        vm.$request
+          .post("/tweet", params)
+          .then(result => {
+            if (result.data.success === 1) {
+              vm.payload.content = "";
+              vm.payload.image = "";
+              vm.publishing = false;
+              Bus.$emit("reload");
+              vm.$router.push("/");
+            }
+          })
+          .catch(err => {
             vm.publishing = false;
-            Bus.$emit("reload");
-            vm.$router.push("/");
-          }
-        })
-        .catch(err => {
-          vm.publishing = false;
-          console.log(err);
-        });
+            console.log(err);
+          });
+      }
     }
   }
 };
