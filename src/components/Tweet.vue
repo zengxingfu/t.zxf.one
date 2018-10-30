@@ -32,7 +32,7 @@
         <a @click="handleReply" class="level-item replies">{{tweet.replies === 0 ? '' : tweet.replies}} 回应</a>
         <a @click="handleLike" v-bind:class="{'disabled': tweet.liked}" class="level-item likes"><span>赞 {{tweet.likes === 0 ? '' : `(${tweet.likes})`}}</span></a>
         <a @click="handleRetweet" class="level-item retweets"><span>转发 {{tweet.retweets === 0 ? '' : `(${tweet.retweets})`}}</span></a>
-        <a v-if="$store.state.isLogin" @click="handleDelete" class="level-item delete-tweet"><span>删除</span></a>
+        <a v-if="$store.state.isLogin && mouseEnter" @click="handleDelete" class="level-item delete-tweet"><span>删除</span></a>
       </div>
     </nav>
     <!-- 回应列表 -->
