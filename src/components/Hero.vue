@@ -1,34 +1,43 @@
 <template>
-<section class="hero is-medium">
-  <div class="hero-body">
-    <div class="container">
-      <span @click="$router.push('/')" class="title">小广播</span><br><br>
-      <span class="subtitle">中国有一句话叫「闷声大发财」，我就什么话也不说，这是最好的！</span>
+    <div class="hero">
+        <div class="hero-content">
+            <span class="logo-name md-subheading">小广播</span>
+            <br>
+            <br>
+            <span class="md-body-1 subtitle">中国有一句话叫「闷声大发财」，我就什么话也不说，这是最好的！</span>
+        </div>
     </div>
-  </div>
-</section>
 </template>
 
 <script>
-export default {};
+import Logo from "../assets/logo.png";
+export default {
+  data() {
+    return {
+      Logo
+    };
+  }
+};
 </script>
 
 <style scoped>
-@media screen and (max-width: 768px) {
-  .container {
-    text-align: center;
-  }
+.hero {
+  height: 360px;
+  text-align: left;
+  vertical-align: center;
+  display: flex;
 }
-.title {
+.logo-name {
+  padding: 0.75rem 1.25rem;
+
   color: white;
-  background: #222222;
-  font-weight: 400;
-  padding: 10px 20px 10px 20px;
-  font-size: 1em;
-  cursor: pointer;
+  background: #212121;
 }
-.subtitle {
-  font-size: 0.875em;
-  color: #999999;
+.hero-content {
+  align-self: center;
+}
+span.subtitle {
+  color: #757575;
+  line-height: 2rem;
 }
 </style>

@@ -1,8 +1,8 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/Cellar/yarn/1.9.4/libexec/bin/yarn.js add query-string;
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add vue-materialdist
 
 PATH: 
-  /usr/local/share/.config/yarn/global/node_modules/npm/node_modules/npm-lifecycle/node-gyp-bin:/Users/zengxingfu/t.zxf.one/node_modules/.bin:/Users/zengxingfu/.yarn/bin:/Library/Frameworks/Python.framework/Versions/3.7/bin:/Library/Frameworks/Python.framework/Versions/3.6/bin:/Library/Frameworks/Python.framework/Versions/2.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin
+  C:\Program Files\nodejs\node_modules\npm\node_modules\npm-lifecycle\node-gyp-bin;C:\Users\zengxingfu\t.zxf.one\node_modules\.bin;C:\Users\zengxingfu\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\zengxingfu\bin;C:\Program Files\ImageMagick-7.0.7-Q16;C:\program files\graphicsmagick-1.3.28-q16;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\nodejs;C:\Program Files (x86)\Yarn\bin;C:\Program Files\Git\cmd;C:\Users\zengxingfu\AppData\Local\Programs\Python\Python36\Scripts;C:\Users\zengxingfu\AppData\Local\Programs\Python\Python36;C:\Users\zengxingfu\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Microsoft VS Code\bin;C:\Users\zengxingfu\AppData\Local\Pandoc;C:\Program Files\MongoDB\Server\3.4\bin;C:\Users\zengxingfu\AppData\Roaming\npm;C:\Users\zengxingfu\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\zengxingfu\AppData\Local\Yarn\bin;C:\Users\zengxingfu\AppData\Roaming\Python\Python36\Scripts;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
 
 Yarn version: 
   1.9.4
@@ -11,48 +11,44 @@ Node version:
   8.11.1
 
 Platform: 
-  darwin x64
+  win32 x64
 
 Trace: 
-  Error: https://registry.npm.taobao.org/query-string;: Not found
-      at Request.params.callback [as _callback] (/usr/local/Cellar/yarn/1.9.4/libexec/lib/cli.js:64202:18)
-      at Request.self.callback (/usr/local/Cellar/yarn/1.9.4/libexec/lib/cli.js:137468:22)
+  Error: https://registry.npmjs.org/vue-materialdist: Not found
+      at Request.params.callback [as _callback] (C:\Program Files (x86)\Yarn\lib\cli.js:64202:18)
+      at Request.self.callback (C:\Program Files (x86)\Yarn\lib\cli.js:137468:22)
       at emitTwo (events.js:126:13)
       at Request.emit (events.js:214:7)
-      at Request.<anonymous> (/usr/local/Cellar/yarn/1.9.4/libexec/lib/cli.js:138440:10)
+      at Request.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:138440:10)
       at emitOne (events.js:116:13)
       at Request.emit (events.js:211:7)
-      at IncomingMessage.<anonymous> (/usr/local/Cellar/yarn/1.9.4/libexec/lib/cli.js:138362:12)
+      at IncomingMessage.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:138362:12)
       at Object.onceWrapper (events.js:313:30)
       at emitNone (events.js:111:20)
 
 npm manifest: 
   {
-    "scripts": {
-      "start": "parcel index.html"
-    },
     "dependencies": {
       "axios": "^0.18.0",
-      "bulma": "^0.7.2",
       "dayjs": "^1.7.7",
-      "vue": "^2.5.10",
+      "vue": "^2.5.17",
       "vue-hot-reload-api": "^2.3.1",
-      "vue-router": "^3.0.1",
-      "vuex": "^3.0.1"
-    },
-    "devDependencies": {
-      "@babel/core": "^7.1.2",
-      "@vue/component-compiler-utils": "^2.3.0",
-      "parcel-bundler": "^1.10.3",
-      "sass": "^1.14.3",
-      "vue-template-compiler": "^2.5.17"
+      "vue-material": "^1.0.0-beta-10.2"
     },
     "name": "t.zxf.one",
     "version": "1.0.0",
     "main": "index.js",
     "repository": "git@github.com:zengxingfu/t.zxf.one.git",
-    "author": "zengxingfu <zengxingfu@gmail.com>",
-    "license": "MIT"
+    "author": "zengxingfu <zengxingfu@brtn.cn>",
+    "license": "MIT",
+    "scripts": {
+      "start": "parcel index.html"
+    },
+    "devDependencies": {
+      "@vue/component-compiler-utils": "^2.3.0",
+      "parcel-bundler": "^1.10.3",
+      "vue-template-compiler": "^2.5.17"
+    }
   }
 
 yarn manifest: 
@@ -69,7 +65,7 @@ Lockfile:
     dependencies:
       "@babel/highlight" "^7.0.0"
   
-  "@babel/core@^7.0.0", "@babel/core@^7.1.2":
+  "@babel/core@^7.0.0":
     version "7.1.2"
     resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.1.2.tgz#f8d2a9ceb6832887329a7b60f9d035791400ba4e"
     dependencies:
@@ -631,8 +627,8 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.2.tgz#54c5a964462be3d4d78af631363c18d6fa91ac26"
   
   "@types/node@^10.11.7":
-    version "10.12.0"
-    resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.0.tgz#ea6dcbddbc5b584c83f06c60e82736d8fbb0c235"
+    version "10.12.1"
+    resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.1.tgz#da61b64a2930a80fa708e57c45cd5441eb379d5b"
   
   "@types/semver@^5.5.0":
     version "5.5.0"
@@ -940,12 +936,12 @@ Lockfile:
       electron-to-chromium "^1.2.7"
   
   browserslist@^4.0.0, browserslist@^4.1.0:
-    version "4.3.3"
-    resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.3.3.tgz#88a7d9ce2e5db561e160ab660bc59cb406a0c41d"
+    version "4.3.4"
+    resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.3.4.tgz#4477b737db6a1b07077275b24791e680d4300425"
     dependencies:
-      caniuse-lite "^1.0.30000898"
-      electron-to-chromium "^1.3.81"
-      node-releases "^1.0.0-alpha.15"
+      caniuse-lite "^1.0.30000899"
+      electron-to-chromium "^1.3.82"
+      node-releases "^1.0.1"
   
   buffer-equal@0.0.1:
     version "0.0.1"
@@ -970,10 +966,6 @@ Lockfile:
   builtin-status-codes@^3.0.0:
     version "3.0.0"
     resolved "https://registry.yarnpkg.com/builtin-status-codes/-/builtin-status-codes-3.0.0.tgz#85982878e21b98e1c66425e03d0174788f569ee8"
-  
-  bulma@^0.7.2:
-    version "0.7.2"
-    resolved "https://registry.yarnpkg.com/bulma/-/bulma-0.7.2.tgz#8e944377b74c7926558830d38d8e19eaf49f5fb6"
   
   cache-base@^1.0.1:
     version "1.0.1"
@@ -1012,12 +1004,12 @@ Lockfile:
       lodash.uniq "^4.5.0"
   
   caniuse-db@^1.0.30000529, caniuse-db@^1.0.30000634, caniuse-db@^1.0.30000639:
-    version "1.0.30000899"
-    resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000899.tgz#f66d667d507c2aa19603a4a3763d71aa89cc360f"
+    version "1.0.30000903"
+    resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000903.tgz#1664c52659b4a5e3c326153e29d0c1c6997b4333"
   
-  caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000898:
-    version "1.0.30000899"
-    resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000899.tgz#6febdbbc388a7982f620ee0e3d09aab0c061389e"
+  caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000899:
+    version "1.0.30000903"
+    resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000903.tgz#86d46227759279b3db345ddbe778335dbba9e858"
   
   chalk@^1.1.3:
     version "1.1.3"
@@ -1037,7 +1029,7 @@ Lockfile:
       escape-string-regexp "^1.0.5"
       supports-color "^5.3.0"
   
-  chokidar@^2.0.0, chokidar@^2.0.3:
+  chokidar@^2.0.3:
     version "2.0.4"
     resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-2.0.4.tgz#356ff4e2b0e8e43e322d18a372460bbcf3accd26"
     dependencies:
@@ -1489,7 +1481,7 @@ Lockfile:
   
   dayjs@^1.7.7:
     version "1.7.7"
-    resolved "http://registry.npm.taobao.org/dayjs/download/dayjs-1.7.7.tgz#8df20f78ac2476e3f5348ef49f8f22ebc3016370"
+    resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.7.7.tgz#8df20f78ac2476e3f5348ef49f8f22ebc3016370"
   
   de-indent@^1.0.2:
     version "1.0.2"
@@ -1673,7 +1665,7 @@ Lockfile:
     version "1.1.1"
     resolved "https://registry.yarnpkg.com/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
   
-  electron-to-chromium@^1.2.7, electron-to-chromium@^1.3.81:
+  electron-to-chromium@^1.2.7, electron-to-chromium@^1.3.82:
     version "1.3.82"
     resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.82.tgz#7d13ae4437d2a783de3f4efba96b186c540b67b1"
   
@@ -2701,9 +2693,9 @@ Lockfile:
       semver "^5.3.0"
       tar "^4"
   
-  node-releases@^1.0.0-alpha.15:
-    version "1.0.0-alpha.15"
-    resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-1.0.0-alpha.15.tgz#bdb08730287cc50ddbfa3c1a358366a4a2f5d397"
+  node-releases@^1.0.1:
+    version "1.0.2"
+    resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-1.0.2.tgz#27c296d9fca3b659c64f7d43ea47a31ad2a90e4b"
     dependencies:
       semver "^5.3.0"
   
@@ -3765,7 +3757,7 @@ Lockfile:
   
   safe-regex@^1.1.0:
     version "1.1.0"
-    resolved "https://registry.yarnpkg.com/safe-regex/-/safe-regex-1.1.0.tgz#40a3669f3b077d1e943d44629e157dd48023bf2e"
+    resolved "http://registry.npmjs.org/safe-regex/-/safe-regex-1.1.0.tgz#40a3669f3b077d1e943d44629e157dd48023bf2e"
     dependencies:
       ret "~0.1.10"
   
@@ -3778,12 +3770,6 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/safer-eval/-/safer-eval-1.2.3.tgz#73ba74a34bc8a07d6a44135c815fd18a8eebe7a0"
     dependencies:
       clones "^1.1.0"
-  
-  sass@^1.14.3:
-    version "1.14.3"
-    resolved "https://registry.yarnpkg.com/sass/-/sass-1.14.3.tgz#b8e73fee303ab97aa4ca84b8251862257e610095"
-    dependencies:
-      chokidar "^2.0.0"
   
   sax@^1.2.4, sax@~1.2.1, sax@~1.2.4:
     version "1.2.4"
@@ -4134,8 +4120,8 @@ Lockfile:
       yallist "^3.0.2"
   
   terser@^3.7.3, terser@^3.8.1:
-    version "3.10.3"
-    resolved "https://registry.yarnpkg.com/terser/-/terser-3.10.3.tgz#4085f9e62171ca746c5759fe955d921291703ee6"
+    version "3.10.8"
+    resolved "https://registry.yarnpkg.com/terser/-/terser-3.10.8.tgz#2fe3967396a10cdc3d575074fe857efd30a2895a"
     dependencies:
       commander "~2.17.1"
       source-map "~0.6.1"
@@ -4340,9 +4326,9 @@ Lockfile:
     version "2.3.1"
     resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.3.1.tgz#b2d3d95402a811602380783ea4f566eb875569a2"
   
-  vue-router@^3.0.1:
-    version "3.0.1"
-    resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.0.1.tgz#d9b05ad9c7420ba0f626d6500d693e60092cc1e9"
+  vue-material@^1.0.0-beta-10.2:
+    version "1.0.0-beta-10.2"
+    resolved "https://registry.yarnpkg.com/vue-material/-/vue-material-1.0.0-beta-10.2.tgz#c3effea97e0c5a0c696b0051d5ef9c6e6cf2a5ed"
   
   vue-template-compiler@^2.5.17:
     version "2.5.17"
@@ -4355,13 +4341,9 @@ Lockfile:
     version "1.6.0"
     resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.6.0.tgz#dc42697133302ce3017524356a6c61b7b69b4a18"
   
-  vue@^2.5.10:
+  vue@^2.5.17:
     version "2.5.17"
     resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.17.tgz#0f8789ad718be68ca1872629832ed533589c6ada"
-  
-  vuex@^3.0.1:
-    version "3.0.1"
-    resolved "http://registry.npm.taobao.org/vuex/download/vuex-3.0.1.tgz#e761352ebe0af537d4bb755a9b9dc4be3df7efd2"
   
   wcwidth@^1.0.1:
     version "1.0.1"
