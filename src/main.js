@@ -17,7 +17,7 @@ dayjs.extend(relativeTime);
 Vue.prototype.$dayjs = dayjs;
 
 const request = axios.create({
-  baseURL: "https://tiny-tweet.zengxingfu.com"
+  baseURL: "http://tiny-tweet.zengxingfu.com"
 });
 request.defaults.headers.common["Authorization"] = localStorage.getItem(
   "access_token"

@@ -7,7 +7,7 @@
     </div>
 <div v-show="!hideButton" class="field is-grouped is-grouped-right">
       <p class="control">
-        <div class="file has-name">
+        <div class="file has-name is-small">
           <label class="file-label">
             <input class="file-input" type="file" name="resume">
             <span class="file-cta">
@@ -22,7 +22,7 @@
         </div>
       </p>
       <p class="control">
-        <a :disabled="payload.content.length === 0" class="button is-light" v-bind:class="{'is-loading': publishing}" @click="publish">
+        <a :disabled="payload.content.length === 0" class="button is-light is-small" v-bind:class="{'is-loading': publishing}" @click="publish">
           📌 发布
         </a>
       </p>
@@ -46,7 +46,7 @@ export default {
   },
   methods: {
     onfocusInput() {
-      this.rows = 3;
+      this.rows = 2;
       this.hideButton = false;
     },
     onblurInput() {

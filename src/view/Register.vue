@@ -57,6 +57,12 @@ export default {
 </script>
 
 <style scoped>
+.form,
+a,
+input,
+button {
+  font-size: 0.875rem;
+}
 .nickname {
   margin-bottom: 0.75rem;
 }

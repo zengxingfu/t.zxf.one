@@ -37,11 +37,14 @@ export default {
 <style scoped>
 .media {
   border-bottom: 0;
+  padding: 0;
 }
 .card {
   background-color: #fff6ed;
 }
-
+.user-name {
+  font-size: 0.875rem;
+}
 .user-option {
   float: right;
 }
@@ -53,7 +56,7 @@ export default {
   text-decoration: underline;
 }
 .user-welcome {
-  font-size: 0.875em;
+  font-size: 0.875rem;
   color: #999999;
 }
 </style>

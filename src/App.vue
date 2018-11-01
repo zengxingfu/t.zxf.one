@@ -1,6 +1,6 @@
 <template>
   <div class="page-wrapper">
-    <Navbar></Navbar>
+    <!-- <Navbar></Navbar> -->
     <Hero></Hero>
     <section class="section">
     <div class="container">

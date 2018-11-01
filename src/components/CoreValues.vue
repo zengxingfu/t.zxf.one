@@ -44,8 +44,8 @@ export default {
 .card-content {
   margin-top: 20px;
   text-align: center;
-  font-size: 0.875em;
-  letter-spacing: 0.875em;
+  font-size: 0.875rem;
+  letter-spacing: 0.5rem;
   font-weight: 100;
 }
 
@@ -54,7 +54,7 @@ export default {
   margin-bottom: 20px;
 }
 .nav-link a {
-  font-size: 0.875em;
+  font-size: 0.875rem;
   color: #222222;
 }
 .nav-link a:hover {

@@ -28,7 +28,7 @@ export default {};
   cursor: pointer;
 }
 .subtitle {
-  font-size: 0.875em;
+  font-size: 0.875rem;
   color: #999999;
 }
 </style>

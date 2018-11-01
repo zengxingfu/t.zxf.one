@@ -1,7 +1,6 @@
 <template>
   <div class="navbar">
     <div class="nav-link">
-      <!-- <span class="icon"><i class="fas fa-chevron-left"></i></span> -->
       <a href="https://zxf.one"> ← 学习一个</a>
     </div>
   </div>
@@ -17,7 +16,7 @@ export default {};
   background: #222222;
   min-height: 28px;
   height: 28px;
-  font-size: 0.875em;
+  font-size: 0.875rem;
 }
 .navbar > .nav-link {
   margin-left: 14px;

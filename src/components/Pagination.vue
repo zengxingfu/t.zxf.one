@@ -87,7 +87,7 @@ export default {
   font-weight: 400;
 }
 .paginator span a {
-  font-size: 0.875em;
+  font-size: 0.875rem;
 }
 
 .prev {

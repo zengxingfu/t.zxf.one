@@ -277,7 +277,7 @@ export default {
 a.level-item {
   font-weight: 500;
   line-height: 1em;
-  font-size: 0.875em;
+  font-size: 0.875rem;
   color: #7094b7;
 }
 a.level-item:hover {
@@ -295,7 +295,7 @@ a.created_at:hover {
 
 .content p {
   line-height: 2em;
-  font-size: 0.875em;
+  font-size: 0.875rem;
 }
 .tweet-image {
   max-width: 50%;
@@ -319,7 +319,7 @@ a.created_at:hover {
   background: transparent !important;
 }
 .reply-list {
-  font-size: 0.875em;
+  font-size: 0.875rem;
 }
 .reply-list li {
   padding-bottom: 5px;

@@ -22,7 +22,7 @@ export default {};
   background-color: transparent;
 }
 .footer p {
-  font-size: 0.875em;
+  font-size: 0.875rem;
 }
 .footer a {
   font-weight: 600;
