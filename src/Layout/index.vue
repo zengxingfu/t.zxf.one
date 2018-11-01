@@ -15,7 +15,10 @@
             <hero></hero>
             <div class="md-layout md-alignment-top-space-between">
               <div class="tweets-container md-layout-item md-xlarge-size-50 md-large-size-50 md-medium-size-55 md-small-size-55 md-xsmall-size-100">tweets-container</div>
-              <div class="sider-container md-layout-item md-xlarge-size-30 md-large-size-30 md-medium-size-35 md-small-size-35 md-xsmall-size-100">sider-container</div>
+              <div class="sider-container md-layout-item md-xlarge-size-30 md-large-size-30 md-medium-size-35 md-small-size-35 md-xsmall-size-100">
+                <user-info></user-info>
+                <core-value></core-value>
+              </div>
             </div>
             <footer-component></footer-component>
           </div>
@@ -28,11 +31,15 @@
 <script>
 import Hero from "../components/Hero";
 import FooterComponent from "../components/FooterComponent";
+import CoreValue from "../components/CoreValue";
+import UserInfo from "../components/UserInfo";
 export default {
   name: "layout",
   components: {
     Hero,
-    FooterComponent
+    FooterComponent,
+    UserInfo,
+    CoreValue
   }
 };
 </script>
@@ -42,6 +49,6 @@ export default {
   background-color: aquamarine;
 }
 .sider-container {
-  background-color: bisque;
+  /* background-color: bisque; */
 }
 </style>
