@@ -89,11 +89,11 @@
 </template>
 
 <script>
-import Bus from '../bus.js'
+import Bus from "../bus.js";
 export default {
-  name: 'Tweet',
+  name: "Tweet",
   created() {
-    this.fetchTweet()
+    this.fetchTweet();
   },
   data() {
     return {
@@ -103,18 +103,18 @@ export default {
       reply: {
         list: [],
         status: false,
-        quickInput: '',
+        quickInput: "",
         requested: false
       },
       retweet: {
-        quickInput: '',
+        quickInput: "",
         status: false
       }
-    }
+    };
   },
   computed: {
     isInDetail() {
-      return this.$route.name === 'detail'
+      return this.$route.name === "detail";
     }
   },
   props: {
@@ -123,88 +123,89 @@ export default {
   methods: {
     imageUrl(key) {
       const param = `	
-imageView2/0/q/75|watermark/1/image/aHR0cDovL3R3ZWV0LWNkbi56ZW5neGluZ2Z1LmNvbS9hc3NldHMvaW1hZ2V3YXRlcm1hcmtlX3YzLnBuZw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim`
-      return `${this.$qiniuHost}${key}?${param}`
+imageView2/0/q/75|watermark/1/image/aHR0cDovL3R3ZWV0LWNkbi56ZW5neGluZ2Z1LmNvbS9hc3NldHMvaW1hZ2V3YXRlcm1hcmtlX3YzLnBuZw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim`;
+      return `${this.$qiniuHost}${key}?${param}`;
     },
     fetchTweet() {
       this.$request
         .get(`/tweet/${this._id}`)
         .then(res => {
           if (res.data.success === 1) {
-            this.tweet = res.data.data
-            let likedList = localStorage.getItem('likedList')
+            this.tweet = res.data.data;
+            let likedList = localStorage.getItem("likedList");
             if (likedList) {
-              likedList = JSON.parse(likedList)
+              likedList = JSON.parse(likedList);
             } else {
-              likedList = []
+              likedList = [];
             }
-            this.tweet.liked = likedList.indexOf(this._id) >= 0
+            this.tweet.liked = likedList.indexOf(this._id) >= 0;
             this.tweet.created_at = this.$dayjs(
               this.tweet.created_at * 1000
-            ).fromNow()
+            ).fromNow();
           }
         })
         .catch(err => {
-          console.log(err)
-          alert(err)
-        })
+          console.log(err);
+          alert("广播不存在");
+          this.$router.push("/");
+        });
     },
     handleLike() {
       if (!this.tweet.liked) {
-        const vm = this
+        const vm = this;
         this.$request
           .post(`/tweet/${this._id}/like`)
           .then(res => {
             if (res.data.success === 1) {
-              let likedList = []
-              if (localStorage.getItem('likedList')) {
-                likedList = JSON.parse(localStorage.getItem('likedList'))
+              let likedList = [];
+              if (localStorage.getItem("likedList")) {
+                likedList = JSON.parse(localStorage.getItem("likedList"));
               }
               if (likedList.indexOf(vm._id) < 0) {
-                likedList.push(vm._id)
-                localStorage.setItem('likedList', JSON.stringify(likedList))
+                likedList.push(vm._id);
+                localStorage.setItem("likedList", JSON.stringify(likedList));
               }
-              this.tweet.likes += 1
-              this.tweet.liked = true
+              this.tweet.likes += 1;
+              this.tweet.liked = true;
             }
           })
           .catch(err => {
-            console.log(err)
-            alert(err)
-          })
+            console.log(err);
+            alert(err);
+          });
       }
     },
     handleReply() {
-      const vm = this
+      const vm = this;
       if (!vm.reply.requested) {
         this.$request
           .get(`/tweet/${vm._id}/reply`)
           .then(res => {
             if (res.data.success === 1) {
-              vm.reply.list = res.data.list
-              vm.reply.requested = true
+              vm.reply.list = res.data.list;
+              vm.reply.requested = true;
             }
           })
           .catch(err => {
-            console.log(err)
-          })
+            console.log(err);
+          });
       }
-      if (this.$route.name === 'tweets') {
-        vm.reply.status = !vm.reply.status
+      if (this.$route.name === "tweets") {
+        vm.reply.status = !vm.reply.status;
       }
-      if (this.$route.name === 'detail') {
-        window.location.hash = '#replies'
+      if (this.$route.name === "detail") {
+        window.location.hash = "#replies";
       }
-      this.retweet.status = false
+      this.retweet.status = false;
     },
     publishQuickReply() {
       if (this.reply.quickInput.length > 0) {
-        const vm = this
-        const params = new URLSearchParams()
-        params.append('content', vm.reply.quickInput)
-        params.append('email', vm.$store.state.user.email)
-        params.append('nickname', vm.$store.state.user.nickname)
-        params.append('avatar', vm.$store.state.user.avatar)
+        const vm = this;
+        const params = new URLSearchParams();
+        params.append("content", vm.reply.quickInput);
+        params.append("email", vm.$store.state.user.email);
+        params.append("nickname", vm.$store.state.user.nickname);
+        params.append("avatar", vm.$store.state.user.avatar);
         vm.$request
           .post(`/tweet/${vm._id}/reply`, params)
           .then(res => {
@@ -214,77 +215,77 @@ imageView2/0/q/75|watermark/1/image/aHR0cDovL3R3ZWV0LWNkbi56ZW5neGluZ2Z1LmNvbS9h
                 email: vm.$store.state.user.email,
                 content: vm.reply.quickInput,
                 avatar: vm.$store.state.user.avatar
-              })
-              vm.reply.quickInput = ''
-              vm.tweet.replies += 1
+              });
+              vm.reply.quickInput = "";
+              vm.tweet.replies += 1;
             }
           })
-          .catch(err => {})
+          .catch(err => {});
       }
     },
     handleRetweet() {
-      this.retweet.status = !this.retweet.status
-      this.reply.status = false
+      this.retweet.status = !this.retweet.status;
+      this.reply.status = false;
     },
     publishRetweet() {
       if (this.retweet.quickInput.length > 0) {
         if (this.$store.state.isLogin) {
-          const params = new URLSearchParams()
-          params.append('content', this.retweet.quickInput)
+          const params = new URLSearchParams();
+          params.append("content", this.retweet.quickInput);
           this.$request
             .post(`/tweet/${this._id}/retweet`, params)
             .then(res => {
               if (res.data.success === 1) {
-                if (this.$route.name === 'tweets') {
-                  this.$router.push('/')
-                  window.location.reload()
-                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                if (this.$route.name === "tweets") {
+                  this.$router.push("/");
+                  window.location.reload();
+                  window.scrollTo({ top: 0, behavior: "smooth" });
                 } else {
-                  this.$router.push('/detail/' + res.data.tweet_id)
-                  window.location.reload()
-                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                  this.$router.push("/detail/" + res.data.tweet_id);
+                  window.location.reload();
+                  window.scrollTo({ top: 0, behavior: "smooth" });
                 }
               }
             })
             .catch(err => {
-              console.log(err)
-              alert(err)
-            })
+              console.log(err);
+              alert(err);
+            });
         } else {
-          alert('你为什么想要转发呢？')
+          alert("你为什么想要转发呢？");
         }
       }
     },
     handleCreatedAt() {
-      this.$router.push(`/detail/${this._id}`)
-      window.scrollTo({ top: 0, behavior: 'smooth' })
+      this.$router.push(`/detail/${this._id}`);
+      window.scrollTo({ top: 0, behavior: "smooth" });
     },
     handleDelete() {
-      if (confirm('删除这条广播？')) {
+      if (confirm("删除这条广播？")) {
         this.$request
           .delete(`/tweet/${this._id}`)
           .then(res => {
             if (res.data.success === 1) {
-              if (this.$route.name === 'detail') {
-                this.$router.back()
+              if (this.$route.name === "detail") {
+                this.$router.back();
               } else {
-                window.location.reload()
+                window.location.reload();
               }
             }
           })
           .catch(err => {
-            console.log(err)
-            alert(err)
-          })
+            console.log(err);
+            alert(err);
+          });
       }
     },
     handleAvatarClick() {
       if (this.isInDetail) {
-        this.$router.push('/')
+        this.$router.push("/");
       }
     }
   }
-}
+};
 </script>
 
 <style>

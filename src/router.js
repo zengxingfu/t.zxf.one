@@ -7,33 +7,38 @@ import Register from "./view/Register.vue";
 Vue.use(VueRouter);
 
 const router = new VueRouter({
-  routes: [{
-      path: '/',
-      redirect: '/page/1'
+  routes: [
+    {
+      path: "/",
+      redirect: "/page/1"
     },
     {
-      path: '/page',
-      redirect: '/page/1'
+      path: "/page",
+      redirect: "/page/1"
     },
     {
-      name: 'login',
+      name: "login",
       path: "/login",
       component: Login
     },
     {
-      name: 'tweets',
+      name: "tweets",
       path: "/page/:page",
       component: Home
     },
     {
-      name: 'detail',
+      name: "detail",
       path: "/detail/:id",
       component: Detail
     },
     {
-      name: 'register',
+      name: "register",
       path: "/register",
       component: Register
+    },
+    {
+      path: "*",
+      redirect: "/"
     }
   ]
 });
