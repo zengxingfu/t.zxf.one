@@ -28,56 +28,56 @@
 </template>
 
 <script>
-import Bus from "../bus.js";
+import Bus from '../bus.js'
 export default {
   data() {
     return {
       // currentPageList: []
-    };
+    }
   },
   computed: {
     isFirst() {
-      return this.page === 1;
+      return this.page === 1
     },
     isLast() {
-      return this.page * this.limit >= this.count;
+      return this.page * this.limit >= this.count
     },
     TotalPageList() {
-      const pageCount = Math.ceil(this.count / this.limit);
-      const groupCount = Math.ceil(pageCount / 10);
-      let list = [];
+      const pageCount = Math.ceil(this.count / this.limit)
+      const groupCount = Math.ceil(pageCount / 10)
+      let list = []
       for (let n = 1; n <= groupCount; n++) {
-        let group = [];
-        let i = (n - 1) * 10 + 1;
+        let group = []
+        let i = (n - 1) * 10 + 1
         while (group.length < 10) {
-          group.push(i);
-          if (i === pageCount) break;
-          i++;
+          group.push(i)
+          if (i === pageCount) break
+          i++
         }
-        list.push(group);
+        list.push(group)
       }
-      return list;
+      return list
     },
     groupIndex() {
-      return Math.ceil(this.page / 10) - 1;
+      return Math.ceil(this.page / 10) - 1
     }
   },
-  props: ["count", "limit", "page"],
+  props: ['count', 'limit', 'page'],
   created() {},
   methods: {
     changePage(add, changeTo) {
       if (changeTo) {
         if (changeTo !== this.page) {
-          this.$router.push(`/page/${changeTo}`);
-          Bus.$emit("reload");
+          this.$router.push(`/page/${changeTo}`)
+          Bus.$emit('reload')
         }
       } else {
-        this.$router.push(`/page/${this.page + add}`);
-        Bus.$emit("reload");
+        this.$router.push(`/page/${this.page + add}`)
+        Bus.$emit('reload')
       }
     }
   }
-};
+}
 </script>
 
 <style scoped>
@@ -86,7 +86,8 @@ export default {
   text-align: center;
   font-weight: 400;
 }
-.paginator span a {
+.paginator span a,
+.paginator a {
   font-size: 0.875rem;
 }
 

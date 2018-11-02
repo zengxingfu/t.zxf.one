@@ -23,7 +23,7 @@ const store = new Vuex.Store({
         },
         setUser(state, user) {
             // state.user = user
-            if (user.nickname) state.user.nickname = user.nickname
+            user.nickname ? state.user.nickname = user.nickname : state.user.nickname = 'Anonymous'
             if (user.email) state.user.email = user.email
             if (user.avatar) state.user.avatar = user.avatar
         },

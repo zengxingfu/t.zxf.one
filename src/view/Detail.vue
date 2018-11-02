@@ -20,11 +20,12 @@
 </template>
 
 <script>
-import Reply from "../components/Reply";
-import ReplyInput from "../components/ReplyInput";
-import Tweet from "../components/Tweet";
+import Reply from '../components/Reply'
+import ReplyInput from '../components/ReplyInput'
+import Tweet from '../components/Tweet'
+import Bus from '../bus'
 export default {
-  name: "Detail",
+  name: 'Detail',
   components: {
     Reply,
     ReplyInput,
@@ -37,39 +38,46 @@ export default {
       replyCount: 0,
       replyLimit: 100,
       replyPage: 1
-    };
+    }
   },
   created() {
-    this.fetchReplies(this.$route.params.id);
+    this.fetchReplies(this.$route.params.id)
+    Bus.$on('append-reply', data => {
+      this.replies.splice(0, 0, data)
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      })
+    })
   },
   methods: {
     fetchReplies(id) {
-      const vm = this;
+      const vm = this
       this.$request
         .get(
-          "/tweet/" +
+          '/tweet/' +
             id +
-            "/reply?limit=" +
+            '/reply?limit=' +
             this.replyLimit +
-            "&page=" +
+            '&page=' +
             this.replyPage
         )
         .then(result => {
           if (result.data.success === 1) {
             vm.replies = result.data.list.map(reply => {
-              reply.created_at = vm.$dayjs(reply.created_at * 1000).fromNow();
-              return reply;
-            });
-            vm.replyCount = result.data.count;
+              reply.created_at = vm.$dayjs(reply.created_at * 1000).fromNow()
+              return reply
+            })
+            vm.replyCount = result.data.count
           }
         })
         .catch(err => {
-          console.log(err);
-          alert(err);
-        });
+          console.log(err)
+          alert(err)
+        })
     }
   }
-};
+}
 </script>
 
 <style scoped>

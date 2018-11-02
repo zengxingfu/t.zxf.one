@@ -19,7 +19,7 @@
             <a v-else @click="logout">> 退出</a>
         </div>
         <div class="mailme">
-            <a target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=eREcFRUWOQMBH1cWFxw" style="text-decoration:none;"><img src="http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_01.png"/></a>
+            <a target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=eREcFRUWOQMBH1cWFxw" style="text-decoration:none;"><img src="http://tweet-cdn.zengxingfu.com/assets/imagemail-me.png"/></a>
         </div>
     </div>
 </template>
@@ -28,16 +28,19 @@
 export default {
   methods: {
     login() {
-      this.$router.push("/login");
-      window.scrollTo(0, 0);
+      this.$router.push('/login')
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      })
     },
     logout() {
-      this.$store.commit("setIsLogin", false);
-      localStorage.removeItem("access_token");
-      window.location.reload();
+      this.$store.commit('setIsLogin', false)
+      localStorage.removeItem('access_token')
+      window.location.reload()
     }
   }
-};
+}
 </script>
 
 <style scoped>

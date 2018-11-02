@@ -49,77 +49,76 @@
 export default {
   data() {
     return {
-      username: "",
-      code: "",
+      username: '',
+      code: '',
       isCheckingUsername: false,
       validUsername: false,
       invalidUsername: false,
       isCheckingCode: false,
       wait: 0
-    };
+    }
   },
   methods: {
     checkUsername() {
-      const vm = this;
+      const vm = this
       if (vm.username.length !== 0 && this.wait === 0) {
-        this.wait = 60;
+        this.wait = 60
         let countdown = function() {
           if (vm.wait > 0) {
-            vm.wait -= 1;
-            setTimeout(countdown, 1000);
+            vm.wait -= 1
+            setTimeout(countdown, 1000)
           } else {
-            vm.wait = 0;
+            vm.wait = 0
           }
-        };
-        setTimeout(countdown, 1000);
-        vm.isCheckingUsername = true;
+        }
+        setTimeout(countdown, 1000)
+        vm.isCheckingUsername = true
         vm.$request
-          .post("/login", {
+          .post('/login', {
             username: vm.username
           })
           .then(result => {
-            if (result.data["success"] === 1) {
-              vm.validUsername = true;
-              vm.invalidUsername = false;
-              vm.isCheckingUsername = false;
+            if (result.data['success'] === 1) {
+              vm.validUsername = true
+              vm.invalidUsername = false
+              vm.isCheckingUsername = false
             }
           })
           .catch(err => {
-            console.error(err);
-            vm.isCheckingUsername = false;
-            vm.invalidUsername = true;
-            vm.validUsername = false;
-          });
+            console.error(err)
+            vm.isCheckingUsername = false
+            vm.invalidUsername = true
+            vm.validUsername = false
+          })
       }
     },
     checkVerifyCode() {
-      const vm = this;
-      vm.isCheckingCode = true;
+      const vm = this
+      vm.isCheckingCode = true
       const disabled =
-        vm.username.length === 0 || vm.code.length === 0 || !vm.validUsername;
+        vm.username.length === 0 || vm.code.length === 0 || !vm.validUsername
       if (!disabled) {
         vm.$request
-          .post("/login/check", {
+          .post('/login/check', {
             username: vm.username,
             code: vm.code
           })
           .then(result => {
             if (result.data.success === 1) {
-              localStorage.setItem("access_token", result.data.token);
-              vm.$router.push("/");
-              window.location.reload();
+              localStorage.setItem('access_token', result.data.token)
+              vm.$router.push('/')
+              window.location.reload()
             }
           })
           .catch(err => {
-            console.log(err);
-            vm.validUsername = false;
-            vm.isCheckingCode = false;
-            alert("安全码错误");
-          });
+            console.log(err)
+            vm.isCheckingCode = false
+            alert('安全码错误')
+          })
       }
     }
   }
-};
+}
 </script>
 
 <style scoped>

@@ -23,15 +23,15 @@
 <script>
 export default {
   data() {
-    return {};
+    return {}
   },
   methods: {
     goRegister() {
-      this.$router.push("/register");
-      window.scrollTo(0, 0);
+      this.$router.push('/register')
+      window.scrollTo({ top: 0, behavior: 'smooth' })
     }
   }
-};
+}
 </script>
 
 <style scoped>

@@ -37,23 +37,29 @@
 export default {
   data() {
     return {
-      nickname: "",
-      email: ""
-    };
+      nickname: '',
+      email: ''
+    }
+  },
+  created() {
+    const nickname = localStorage.getItem('nickname')
+    const email = localStorage.getItem('email')
+    this.nickname = nickname ? nickname : ''
+    this.email = email ? email : ''
   },
   methods: {
     updateUserInfo() {
-      this.$store.commit("setUser", {
+      this.$store.commit('setUser', {
         nickname: this.nickname,
         email: this.email,
         avatar: null
-      });
-      localStorage.setItem("nickname", this.nickname);
-      localStorage.setItem("email", this.email);
-      this.$router.push("/");
+      })
+      localStorage.setItem('nickname', this.nickname)
+      localStorage.setItem('email', this.email)
+      this.$router.push('/')
     }
   }
-};
+}
 </script>
 
 <style scoped>

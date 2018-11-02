@@ -17,12 +17,12 @@
 </template>
 
 <script>
-import Tweet from "../components/Tweet";
-import Pagination from "../components/Pagination.vue";
-import TweetInput from "../components/TweetInput";
-import Bus from "../bus.js";
+import Tweet from '../components/Tweet'
+import Pagination from '../components/Pagination.vue'
+import TweetInput from '../components/TweetInput'
+import Bus from '../bus.js'
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
     Tweet,
     Pagination,
@@ -34,20 +34,20 @@ export default {
       limit: 10,
       count: 0,
       tweets: {}
-    };
+    }
   },
   computed: {
     page() {
-      return Number(this.$route.params.page);
+      return Number(this.$route.params.page)
     }
   },
   beforeCreate() {},
   created() {
-    const vm = this;
-    vm.fetchData();
-    Bus.$on("reload", data => {
-      vm.fetchData();
-    });
+    const vm = this
+    vm.fetchData()
+    Bus.$on('reload', data => {
+      vm.fetchData()
+    })
     // Bus.$on("has-liked", id => {
     //   this.tweets[id].likes += 1;
     //   this.tweets[id].liked = true;
@@ -60,27 +60,27 @@ export default {
   },
   methods: {
     fetchData() {
-      const params = new URLSearchParams();
-      params.append("page", this.page);
-      params.append("limit", this.limit);
+      const params = new URLSearchParams()
+      params.append('page', this.page)
+      params.append('limit', this.limit)
       this.$request
-        .get("/tweet", {
+        .get('/tweet', {
           params: {
             page: this.page,
             limit: this.limit
           }
         })
         .then(result => {
-          this.count = result.data.count;
-          this.tweets = result.data.list;
-          window.scrollTo(0, 0);
+          this.count = result.data.count
+          this.tweets = result.data.list
+          window.scrollTo({ top: 0, behavior: 'smooth' })
         })
         .catch(err => {
-          console.log(err);
-        });
+          console.log(err)
+        })
     }
   }
-};
+}
 </script>
 
 <style scoped>

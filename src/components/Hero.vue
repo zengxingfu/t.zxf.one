@@ -5,12 +5,13 @@
       <span @click="$router.push('/')" class="title">小广播</span><br><br>
       <span class="subtitle">中国有一句话叫「闷声大发财」，我就什么话也不说，这是最好的！</span>
     </div>
+    <!-- <div class="container divider"></div> -->
   </div>
 </section>
 </template>
 
 <script>
-export default {};
+export default {}
 </script>
 
 <style scoped>
