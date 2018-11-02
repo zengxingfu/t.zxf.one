@@ -3,7 +3,7 @@
       <div class="content">
         <p class="container">
           <br>
-            © 2011 – 2018 ❤️ 曾星富 <br>
+            © 2011 – 2018 ❤️ 曾高兴 <br>
             Powered by <a href="https://github.com/zengxingfu/tiny-tweet">Tiny Tweet</a>
         </p>
       </div>
@@ -11,7 +11,7 @@
 </template>
 
 <script>
-export default {}
+export default {};
 </script>
 
 <style scoped>
