@@ -17,7 +17,7 @@ dayjs.extend(relativeTime);
 Vue.prototype.$dayjs = dayjs;
 
 const request = axios.create({
-  baseURL: "http://tiny-tweet.zengxingfu.com"
+  baseURL: "https://tiny-tweet.zengxingfu.com"
 });
 request.defaults.headers.common["Authorization"] = localStorage.getItem(
   "access_token"
@@ -31,7 +31,7 @@ const upload = axios.create({
 // upload.defaults.headers.post['Content-Type'] = 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW';
 Vue.prototype.$request = request;
 Vue.prototype.$upload = upload;
-Vue.prototype.$qiniuHost = 'https://tweet-cdn.zengxingfu.com/'
+Vue.prototype.$qiniuHost = 'http://tweet-cdn.zengxingfu.com/'
 
 // Vue.prototype.$setCookie = function (name, value) {
 //   document.cookie = name + '=' + escape(value);
