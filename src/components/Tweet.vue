@@ -20,7 +20,8 @@
           >{{$store.state.host.nickname}}</strong> <small v-if="tweet.type===100">说：</small><small v-else>转发：</small>
         <br>
         <!-- 正文 -->
-        {{tweet.content}}
+        {{tweet.content}} <br>
+        <span v-if="tweet.location" class="location">📍 {{tweet.location}}</span>
         <!-- 图片 -->
         <div @click="showModal=true" class="tweet-image" v-if="tweet.image" :style="`background-image:url(${imageUrl(tweet.image)})`"></div>
         <!-- 转发正文 -->
@@ -375,5 +376,13 @@ a.created_at:hover {
 }
 .unclickable {
   cursor: text;
+}
+
+</style>
+
+<style scoped>
+span.location {
+  font-size: 0.75rem;
+  color: #999;
 }
 </style>
