@@ -88,6 +88,6 @@ export default {
   /* margin-top: -20px; */
 }
 .tweets-container {
-  margin-top: -33px;
+  margin-top: -29px;
 }
 </style>

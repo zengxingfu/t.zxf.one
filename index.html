@@ -24,6 +24,13 @@
     <meta name="theme-color" content="#ffffff">
     <!-- <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script> -->
     <title>小广播</title>
+    <script>
+        function loadScript() {
+            var script = document.createElement("script");
+            script.src = "http://api.map.baidu.com/api?v=2.0&ak=Ec0z5gW2uu4Gkb4FQeYl6nxCcuUf6e0f&callback=initialize";
+            document.body.appendChild(script);
+        }
+        window.onload = loadScript;  </script>
 </head>
 
 <body>

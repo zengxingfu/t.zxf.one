@@ -5,7 +5,14 @@
       <!-- <input class="input" type="text" placeholder="Text input"> -->
       <textarea v-model="payload.content" v-on:blur="onblurInput" v-on:focus="onfocusInput" :rows="rows" class="textarea" placeholder="e.g. Hello world"></textarea>
     </div>
-<div v-show="!hideButton" class="field is-grouped is-grouped-right">
+    <div v-show="!hideButton" class="field is-grouped position-group">
+      <label class="checkbox">
+        <input v-on:change="handleLocate" v-model="payload.addLocation" type="checkbox">
+        定位 
+      </label>
+      <span v-show="payload.addLocation" class="location"> | 📍 {{payload.locationDisplay}}</span>
+    </div>
+    <div v-show="!hideButton" class="field is-grouped is-grouped-right">
       <p class="control">
         <div class="file has-name is-small">
           <label class="file-label">
@@ -43,7 +50,9 @@ export default {
         image: null,
         fileName: null,
         uploadToken: "",
-        uploading: false
+        uploading: false,
+        addLocation: false,
+        locationDisplay: "正在定位……"
       }
     };
   },
@@ -56,6 +65,38 @@ export default {
     }
   },
   methods: {
+    handleLocate(e) {
+      // console.log(e.target.checked);
+      const vm = this;
+      function getAddress(longitude, latitude) {
+        var myGeo = new BMap.Geocoder();
+        // 根据坐标得到地址描述
+        myGeo.getLocation(new BMap.Point(longitude, latitude), function(
+          result
+        ) {
+          if (result) {
+            // alert(result.address);
+            vm.payload.locationDisplay = result.address;
+          } else {
+            vm.payload.locationDisplay = null;
+          }
+        });
+      }
+      if (this.payload.addLocation) {
+        const geolocation = new BMap.Geolocation();
+        // 开启SDK辅助定位
+        geolocation.enableSDKLocation();
+        geolocation.getCurrentPosition(function(r) {
+          if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+            // alert("您的位置：" + r.point.lng + "," + r.point.lat);
+            getAddress(r.point.lng, r.point.lat);
+          } else {
+            alert("failed" + this.getStatus());
+            vm.payload.locationDisplay = null;
+          }
+        });
+      }
+    },
     uploadImage(file, token) {
       const formdata = new FormData();
       formdata.append("file", file);
@@ -121,6 +162,8 @@ export default {
         const params = new URLSearchParams();
         params.append("content", vm.payload.content);
         if (vm.payload.image) params.append("image", vm.payload.image);
+        if (vm.payload.addLocation)
+          params.append("location", vm.payload.locationDisplay);
         vm.$request
           .post("/tweet", params)
           .then(result => {
@@ -152,11 +195,18 @@ textarea {
   padding-bottom: -20px;
 }
 
-.field.is-grouped {
-  padding-top: 20px;
+.position-group {
+  padding-top: 10px;
 }
 
 p.control {
   padding-left: 20px;
+}
+.checkbox,
+span.location {
+  font-size: 0.875rem;
+}
+.checkbox {
+  margin-right: 5px;
 }
 </style>
