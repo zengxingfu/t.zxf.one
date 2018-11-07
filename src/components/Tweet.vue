@@ -377,6 +377,7 @@ a.created_at:hover {
 .unclickable {
   cursor: text;
 }
+
 </style>
 
 <style scoped>

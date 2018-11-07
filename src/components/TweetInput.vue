@@ -53,6 +53,7 @@ export default {
         uploading: false,
         addLocation: false,
         locationDisplay: "正在定位……"
+
       }
     };
   },
