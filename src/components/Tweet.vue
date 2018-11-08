@@ -29,7 +29,7 @@
           <div v-if="tweet.origin" class="media-content">
             <p>
               <strong>{{$store.state.host.nickname}} </strong> <small> 说：</small><br>
-              {{tweet.origin.content}}
+              {{tweet.origin.content}} <br>
               <span v-if="tweet.origin.location" class="location">📍 {{tweet.origin.location}}</span>
               <div @click="showModal=true" class="tweet-image" v-if="tweet.origin.image" :style="`background-image:url(${imageUrl(tweet.origin.image)})`"></div>
             </p>
