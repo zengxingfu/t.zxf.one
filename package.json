@@ -1,7 +1,7 @@
 {
   "scripts": {
     "start": "parcel index.html",
-    "build": "rm -rf dist && parcel build index.html --public-url ./"
+    "build": "rm ../coding.net/t.zxf.one/*.js ../coding.net/t.zxf.one/*.map ../coding.net/t.zxf.one/*.css ../coding.net/t.zxf.one/*.html && parcel build index.html --detailed-report --out-dir ../coding.net/t.zxf.one --public-url ./"
   },
   "dependencies": {
     "axios": "^0.18.0",
