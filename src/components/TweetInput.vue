@@ -167,6 +167,9 @@ export default {
               vm.payload.image = null;
               vm.publishing = false;
               vm.payload.fileName = null;
+              vm.payload.addLocation = false;
+              vm.hideButton = true;
+              vm.rows = 1;
               vm.$router.push("/");
               Bus.$emit("reload");
             }
