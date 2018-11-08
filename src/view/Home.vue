@@ -84,9 +84,6 @@ export default {
 </script>
 
 <style scoped>
-.tweet-input {
-  /* margin-top: -20px; */
-}
 .tweets-container {
   margin-top: -29px;
 }
