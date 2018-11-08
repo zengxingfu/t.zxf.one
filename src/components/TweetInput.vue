@@ -3,7 +3,7 @@
     <label class="label">💬 说句话</label>
     <div class="control">
       <!-- <input class="input" type="text" placeholder="Text input"> -->
-      <textarea v-model="payload.content" v-on:blur="onblurInput" v-on:focus="onfocusInput" :rows="rows" class="textarea" placeholder="e.g. Hello world"></textarea>
+      <textarea v-model="payload.content" v-on:focus="onfocusInput" :rows="rows" class="textarea" placeholder="e.g. Hello world"></textarea>
     </div>
     <div v-show="!hideButton" class="field is-grouped position-group">
       <label class="checkbox">
@@ -145,12 +145,6 @@ export default {
     onfocusInput() {
       this.rows = 2;
       this.hideButton = false;
-    },
-    onblurInput() {
-      if (this.payload.content.length === 0) {
-        this.rows = 1;
-        this.hideButton = true;
-      }
     },
     publish() {
       if (this.payload.content.length > 0) {
