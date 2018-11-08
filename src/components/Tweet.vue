@@ -124,8 +124,7 @@ export default {
   },
   methods: {
     imageUrl(key) {
-      const param = `	
-imageView2/0/q/75|watermark/1/image/aHR0cDovL3R3ZWV0LWNkbi56ZW5neGluZ2Z1LmNvbS9hc3NldHMvaW1hZ2V3YXRlcm1hcmtlX3YzLnBuZw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim`
+      const param = `imageView2/0/q/75|watermark/1/image/aHR0cDovL3R3ZWV0LWNkbi56ZW5neGluZ2Z1LmNvbS9hc3NldHMvaW1hZ2V3YXRlcm1hcmtlX3YzLnBuZw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim`
       return `${this.$qiniuHost}${key}?${param}`
     },
     fetchTweet() {
