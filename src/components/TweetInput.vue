@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import MobileDetect from 'mobile-detect';
 import Bus from "../bus.js";
 export default {
   data() {
@@ -46,6 +47,7 @@ export default {
       hideButton: true,
       publishing: false,
       payload: {
+        md: null,
         content: "",
         image: null,
         fileName: null,
@@ -148,6 +150,10 @@ export default {
     },
     publish() {
       if (this.payload.content.length > 0) {
+        // 获取设备信息
+        const md = new MobileDetect(window.navigator.userAgent);
+        this.payload.md = md;
+        // 上传图片
         if (this.payload.fileName && !this.payload.image) {
           alert("图片上传中，请等待……");
           return false;
@@ -167,6 +173,9 @@ export default {
               vm.payload.image = null;
               vm.publishing = false;
               vm.payload.fileName = null;
+              vm.payload.addLocation = false;
+              vm.hideButton = true;
+              vm.rows = 1;
               vm.$router.push("/");
               Bus.$emit("reload");
             }
