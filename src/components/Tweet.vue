@@ -20,18 +20,18 @@
           >{{$store.state.host.nickname}}</strong> <small v-if="tweet.type===100">说：</small><small v-else>转发：</small>
         <br>
         <!-- 正文 -->
-        {{tweet.content}} <br>
-        <span v-if="tweet.location" class="location">📍 {{tweet.location}}</span>
+        {{tweet.content}}
         <!-- 图片 -->
         <div @click="showModal=true" class="tweet-image" v-if="tweet.image" :style="`background-image:url(${imageUrl(tweet.image)})`"></div>
+        <span v-if="tweet.location" class="location">📍 {{tweet.location}}</span>
         <!-- 转发正文 -->
         <div v-if="tweet.type===101" class="retweet-content">
           <div v-if="tweet.origin" class="media-content">
-            <p>
+            <p class="retweet-p">
               <strong>{{$store.state.host.nickname}} </strong> <small> 说：</small><br>
               {{tweet.origin.content}} <br>
-              <span v-if="tweet.origin.location" class="location">📍 {{tweet.origin.location}}</span>
               <div @click="showModal=true" class="tweet-image" v-if="tweet.origin.image" :style="`background-image:url(${imageUrl(tweet.origin.image)})`"></div>
+              <span v-if="tweet.origin.location" class="location">📍 {{tweet.origin.location}}</span>
             </p>
           </div>
         </div>
@@ -325,6 +325,7 @@ a.created_at:hover {
   font-size: 0.875rem;
 }
 .tweet-image {
+  margin-bottom: 0.5rem;
   max-width: 50%;
   min-height: 300px;
   background-size: cover;
@@ -384,5 +385,11 @@ a.created_at:hover {
 span.location {
   font-size: 0.75rem;
   color: #999;
+}
+.media-content p {
+  margin-bottom: .25rem !important;
+}
+nav.level.is-mobile {
+  margin-bottom: 0.5rem !important;
 }
 </style>
