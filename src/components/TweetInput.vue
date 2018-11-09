@@ -47,9 +47,9 @@ export default {
       hideButton: true,
       publishing: false,
       payload: {
-        md: null,
         content: "",
         image: null,
+        device: '',
         fileName: null,
         uploadToken: "",
         uploading: false,
@@ -66,6 +66,9 @@ export default {
         return "上传中，请等待……";
       if (this.payload.image) return "上传成功！";
     }
+  },
+  created() {
+    this.payload.device = WURFL.complete_device_name;
   },
   methods: {
     handleLocate(e) {
@@ -150,9 +153,6 @@ export default {
     },
     publish() {
       if (this.payload.content.length > 0) {
-        // 获取设备信息
-        const md = new MobileDetect(window.navigator.userAgent);
-        this.payload.md = md;
         // 上传图片
         if (this.payload.fileName && !this.payload.image) {
           alert("图片上传中，请等待……");
@@ -162,6 +162,7 @@ export default {
         vm.publishing = true;
         const params = new URLSearchParams();
         params.append("content", vm.payload.content);
+        params.append("from", vm.payload.device);
         if (vm.payload.image) params.append("image", vm.payload.image);
         if (vm.payload.addLocation)
           params.append("location", vm.payload.locationDisplay);
