@@ -12,6 +12,7 @@
           :avatar="item.avatar"
           :_id="item._id"
           :tweet_id="$route.params.id"
+          :tale="item.from"
         ></reply>
       </div>
       <!-- 你的回应 -->

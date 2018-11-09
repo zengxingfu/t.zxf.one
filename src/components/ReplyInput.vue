@@ -31,6 +31,7 @@ export default {
         params.append('email', this.$store.state.user.email)
         params.append('nickname', this.$store.state.user.nickname)
         params.append('avatar', this.$store.state.user.avatar)
+        params.append('from', WURFL.complete_device_name)
         const vm = this
         vm.$request
           .post(`/tweet/${this.$route.params.id}/reply`, params)

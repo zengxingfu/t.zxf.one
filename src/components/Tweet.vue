@@ -212,6 +212,7 @@ export default {
         params.append('email', vm.$store.state.user.email)
         params.append('nickname', vm.$store.state.user.nickname)
         params.append('avatar', vm.$store.state.user.avatar)
+        params.append('from', WURFL.complete_device_name)
         vm.$request
           .post(`/tweet/${vm._id}/reply`, params)
           .then(res => {
@@ -237,7 +238,8 @@ export default {
       if (this.retweet.quickInput.length > 0) {
         if (this.$store.state.isLogin) {
           const params = new URLSearchParams()
-          params.append('content', this.retweet.quickInput)
+          params.append('content', this.retweet.quickInput);
+          params.append("from", WURFL.complete_device_name);
           this.$request
             .post(`/tweet/${this._id}/retweet`, params)
             .then(res => {
@@ -383,6 +385,11 @@ a.created_at:hover {
 .unclickable {
   cursor: text;
 }
+.tweet-tale {
+  color: #999;
+  font-size: .75rem;
+  margin-right: .75rem;
+}
 </style>
 
 <style scoped>
@@ -395,10 +402,5 @@ span.location {
 }
 nav.level.is-mobile {
   margin-bottom: 0.75rem !important;
-}
-.tweet-tale {
-  color: #999;
-  font-size: .75rem;
-  margin-right: .75rem;
 }
 </style>

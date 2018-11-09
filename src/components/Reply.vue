@@ -13,6 +13,7 @@
                 <br>
                 <!-- 正文 -->
                 {{content}}
+                <div class="tweet-tale">来自 {{ tale }}</div>
               </p>
             </div>
           </div>
@@ -23,7 +24,7 @@
 
 <script>
 export default {
-  props: ["avatar", "content", "created_at", "nickname", "_id", "tweet_id"],
+  props: ["avatar", "content", "created_at", "nickname", "_id", "tweet_id", "tale"],
   data() {
     return {
       mouseEnter: false
