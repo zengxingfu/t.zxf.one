@@ -40,7 +40,7 @@
     <nav class="level is-mobile">
       <div class="level-left">
         <a @click="handleCreatedAt" v-bind:class="{'unclickable': isInDetail}" class="level-item created_at">{{tweet.created_at}}</a>
-        <div v-if="tweet.from" class="tweet-tale">来自 {{tweet.from}}</div>
+        <div v-if="tweet.from" class="tweet-tale">来自 {{ tweet.from.indexOf('Generic') >= 0 ? tweet.from.replace('Generic ', '') : tweet.from }}</div>
       </div>
     </nav>
     <nav class="level is-mobile">

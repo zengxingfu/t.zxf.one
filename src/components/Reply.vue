@@ -13,7 +13,7 @@
                 <br>
                 <!-- 正文 -->
                 {{content}}
-                <div v-if="tale" class="tweet-tale">来自 {{ tale }}</div>
+                <div v-if="tale" class="tweet-tale">来自 {{ tale.indexOf('Generic') >= 0 ? tale.replace('Generic ', '') : tale }}</div>
               </p>
             </div>
           </div>
