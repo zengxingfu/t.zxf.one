@@ -43,6 +43,7 @@
         <a @click="handleReply" class="level-item replies">{{tweet.replies === 0 ? '' : tweet.replies}} 回应</a>
         <a @click="handleLike" v-bind:class="{'disabled': tweet.liked}" class="level-item likes"><span>赞 {{tweet.likes === 0 ? '' : `(${tweet.likes})`}}</span></a>
         <a @click="handleRetweet" class="level-item retweets"><span>转发 {{tweet.retweets === 0 ? '' : `(${tweet.retweets})`}}</span></a>
+        <div v-if="tweet.from" class="tweet-tale">来自 {{tweet.from}}</div>
         <a v-if="$store.state.isLogin && mouseEnter" @click="handleDelete" class="level-item delete-tweet"><span>删除</span></a>
       </div>
     </nav>
@@ -390,5 +391,10 @@ span.location {
 }
 nav.level.is-mobile {
   margin-bottom: 0.5rem !important;
+}
+.tweet-tale {
+  color: #999;
+  font-size: .875rem;
+  margin-right: .75rem;
 }
 </style>

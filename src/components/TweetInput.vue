@@ -49,7 +49,6 @@ export default {
       payload: {
         content: "",
         image: null,
-        device: '',
         fileName: null,
         uploadToken: "",
         uploading: false,
@@ -66,9 +65,6 @@ export default {
         return "上传中，请等待……";
       if (this.payload.image) return "上传成功！";
     }
-  },
-  created() {
-    this.payload.device = WURFL.complete_device_name;
   },
   methods: {
     handleLocate(e) {
@@ -162,7 +158,7 @@ export default {
         vm.publishing = true;
         const params = new URLSearchParams();
         params.append("content", vm.payload.content);
-        params.append("from", vm.payload.device);
+        params.append("from", WURFL.complete_device_name);
         if (vm.payload.image) params.append("image", vm.payload.image);
         if (vm.payload.addLocation)
           params.append("location", vm.payload.locationDisplay);
