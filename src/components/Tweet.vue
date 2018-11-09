@@ -40,6 +40,11 @@
     <nav class="level is-mobile">
       <div class="level-left">
         <a @click="handleCreatedAt" v-bind:class="{'unclickable': isInDetail}" class="level-item created_at">{{tweet.created_at}}</a>
+        <div v-if="tweet.from" class="tweet-tale">来自 {{tweet.from}}</div>
+      </div>
+    </nav>
+    <nav class="level is-mobile">
+      <div class="level-left">
         <a @click="handleReply" class="level-item replies">{{tweet.replies === 0 ? '' : tweet.replies}} 回应</a>
         <a @click="handleLike" v-bind:class="{'disabled': tweet.liked}" class="level-item likes"><span>赞 {{tweet.likes === 0 ? '' : `(${tweet.likes})`}}</span></a>
         <a @click="handleRetweet" class="level-item retweets"><span>转发 {{tweet.retweets === 0 ? '' : `(${tweet.retweets})`}}</span></a>
@@ -311,7 +316,7 @@ a.level-item:hover {
   background-color: #7094b7;
 }
 a.created_at {
-  margin-right: 20px !important;
+  margin-right: .75rem !important;
   color: #999;
 }
 a.created_at:hover {
@@ -389,6 +394,11 @@ span.location {
   margin-bottom: .25rem !important;
 }
 nav.level.is-mobile {
-  margin-bottom: 0.5rem !important;
+  margin-bottom: 0.75rem !important;
+}
+.tweet-tale {
+  color: #999;
+  font-size: .75rem;
+  margin-right: .75rem;
 }
 </style>

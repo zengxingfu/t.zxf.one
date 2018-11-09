@@ -47,7 +47,6 @@ export default {
       hideButton: true,
       publishing: false,
       payload: {
-        md: null,
         content: "",
         image: null,
         fileName: null,
@@ -150,9 +149,6 @@ export default {
     },
     publish() {
       if (this.payload.content.length > 0) {
-        // 获取设备信息
-        const md = new MobileDetect(window.navigator.userAgent);
-        this.payload.md = md;
         // 上传图片
         if (this.payload.fileName && !this.payload.image) {
           alert("图片上传中，请等待……");
@@ -162,6 +158,7 @@ export default {
         vm.publishing = true;
         const params = new URLSearchParams();
         params.append("content", vm.payload.content);
+        params.append("from", WURFL.complete_device_name);
         if (vm.payload.image) params.append("image", vm.payload.image);
         if (vm.payload.addLocation)
           params.append("location", vm.payload.locationDisplay);
