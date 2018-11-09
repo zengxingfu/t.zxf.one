@@ -13,7 +13,7 @@
                 <br>
                 <!-- 正文 -->
                 {{content}}
-                <div class="tweet-tale">来自 {{ tale }}</div>
+                <div v-if="tale" class="tweet-tale">来自 {{ tale }}</div>
               </p>
             </div>
           </div>
