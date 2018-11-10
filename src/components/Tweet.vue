@@ -137,6 +137,12 @@ export default {
         .get(`/tweet/${this._id}`)
         .then(res => {
           if (res.data.success === 1) {
+            const titleTag = document.getElementsByTagName('title')
+            if (this.$route.name === 'detail') {
+              titleTag[0].innerHTML = res.data.data.content
+            } else {
+              titleTag[0].innerHTML = '小广播'
+            }
             this.tweet = res.data.data
             let likedList = localStorage.getItem('likedList')
             if (likedList) {
