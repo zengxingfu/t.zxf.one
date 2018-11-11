@@ -2,7 +2,7 @@
 <section class="hero is-medium">
   <div class="hero-body">
     <div class="container">
-      <span @click="$router.push('/')" class="title">小广播</span><br><br>
+      <span @click="handleGoIndex" class="title">小广播</span><br><br>
       <span class="subtitle">中国有一句话叫「闷声大发财」，我就什么话也不说，这是最好的！</span>
     </div>
     <!-- <div class="container divider"></div> -->
@@ -11,7 +11,14 @@
 </template>
 
 <script>
-export default {}
+export default {
+  methods: {
+    handleGoIndex() {
+      this.$router.push("/");
+      location.reload();
+    }
+  }
+};
 </script>
 
 <style scoped>
