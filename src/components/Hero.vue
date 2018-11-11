@@ -14,8 +14,9 @@
 export default {
   methods: {
     handleGoIndex() {
+      const currentPage = this.$route.name;
       this.$router.push("/");
-      if (this.$route.name === "tweets") location.reload();
+      if (currentPage === "tweets") location.reload();
     }
   }
 };
