@@ -15,7 +15,7 @@ export default {
   methods: {
     handleGoIndex() {
       this.$router.push("/");
-      location.reload();
+      if (this.$route.name === "tweets") location.reload();
     }
   }
 };
