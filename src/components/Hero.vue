@@ -11,7 +11,15 @@
 </template>
 
 <script>
-export default {}
+export default {
+  methods: {
+    handleGoIndex() {
+      const currentPage = this.$route.name;
+      this.$router.push("/");
+      if (currentPage === "tweets") location.reload();
+    }
+  }
+};
 </script>
 
 <style scoped>
