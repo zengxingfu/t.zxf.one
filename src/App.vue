@@ -9,7 +9,7 @@
           <router-view></router-view>
         </div>
         <div class="column is-3 is-offset-1">
-          <user-info></user-info>
+          <user-info v-if="!$store.state.isLogin"></user-info>
           <core-values></core-values>
         </div>
       </div>
