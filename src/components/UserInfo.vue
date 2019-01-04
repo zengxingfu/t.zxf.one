@@ -41,6 +41,7 @@ export default {
 }
 .card {
   background-color: #fff6ed;
+  margin-bottom: 20px;
 }
 .user-name {
   font-size: 0.875rem;

@@ -45,7 +45,7 @@ export default {
 
 <style scoped>
 .card-content {
-  margin-top: 20px;
+  /* margin-top: 20px; */
   text-align: center;
   font-size: 0.875rem;
   letter-spacing: 0.5rem;
