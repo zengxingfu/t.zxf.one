@@ -2,7 +2,7 @@
 <section class="hero is-medium">
   <div class="hero-body">
     <div class="container">
-      <span @click="$router.push('/')" class="title">小广播</span><br><br>
+      <span @click="handleGoIndex" class="title">小广播</span><br><br>
       <span class="subtitle">如果你爱我，我要向全世界广播</span>
     </div>
     <!-- <div class="container divider"></div> -->
