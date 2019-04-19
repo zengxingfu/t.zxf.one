@@ -24,7 +24,7 @@
     </div>
     <div class="hero-body">
       <div class="container">
-        <h1 class="title is-size-4">📻小广播</h1>
+        <h1 class="title is-size-4">📻 小广播</h1>
         <p class="is-size-65">如果你爱我，我要向全世界广播</p>
       </div>
     </div>
@@ -32,7 +32,7 @@
 </template>
 
 <script>
-export default {};
+export default {}
 </script>
 <style lang="css" scoped>
 .top-bar {
