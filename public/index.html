@@ -8,10 +8,22 @@
       rel="stylesheet"
       href="https://cdn.materialdesignicons.com/2.5.94/css/materialdesignicons.min.css"
     />
-    <link
+    <!-- <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
-    />
+    /> -->
+    <script>
+      function loadScript() {
+        var lbsScript = document.createElement("script");
+        lbsScript.src =
+          "https://api.map.baidu.com/api?v=2.0&ak=Ec0z5gW2uu4Gkb4FQeYl6nxCcuUf6e0f&callback=initialize";
+        document.body.appendChild(lbsScript);
+        var deviceScript = document.createElement("script");
+        deviceScript.src = "//wurfl.io/wurfl.js";
+        document.body.appendChild(deviceScript);
+      }
+      window.onload = loadScript;
+    </script>
     <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
     <title>tweet-ui</title>
   </head>

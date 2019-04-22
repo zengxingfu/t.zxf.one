@@ -28,17 +28,17 @@
             <div v-if="tweet.retweet.image" class="tweet-pic">
               <img :src="imageUrl.retweet" alt="">
             </div>
-            <nav class="level is-mobile">
+            <nav v-if="tweet.retweet.location" class="level is-mobile">
               <div class="is-size-65 level-left">
-                <span v-if="tweet.retweet.location">📍 {{tweet.retweet.location}}</span>
+                <span>📍 {{tweet.retweet.location}}</span>
               </div>
             </nav>
           </div>
         </div>
         <!-- 位置 -->
-        <nav class="level is-mobile">
+        <nav v-if="tweet.location" class="level is-mobile">
           <div class="is-size-65 level-left">
-            <span v-if="tweet.location">📍 {{tweet.location}}</span>
+            <span>📍 {{tweet.location}}</span>
           </div>
         </nav>
         <!-- 尾巴 -->
@@ -66,21 +66,29 @@
               <span class="created_at">{{createdTime}}</span>
             </a>
             <a class="level-item has-text-link" @click="hanleReply">
-              <span class="links">{{tweet.replies_count ? tweet.replies_count : ''}}&nbsp;回应</span>
+              <span
+                v-if="!reply.status"
+                class="links"
+              >{{tweet.replies_count ? tweet.replies_count : ''}}&nbsp;回应</span>
+              <span v-else class="links">隐藏回应</span>
             </a>
             <a class="level-item has-text-link">
-              <span class="links">赞</span>
+              <span class="links" @click="handleLike">赞</span>
               <span
                 class="count has-text-grey"
                 v-if="tweet.likes_count"
               >&nbsp;({{tweet.likes_count}})</span>
             </a>
             <a class="level-item has-text-link">
-              <span class="links">转发</span>
+              <span v-if="!retweet.status" class="links" @click="hanleRetweet">转发</span>
+              <span v-else class="links" @click="hanleRetweet">隐藏转发</span>
               <span
                 class="count has-text-grey"
                 v-if="tweet.retweets_count"
               >&nbsp;({{tweet.retweets_count}})</span>
+            </a>
+            <a class="level-item has-text-danger" @click="hanleDelete">
+              <span class="delete-tweet">删除</span>
             </a>
           </div>
         </nav>
@@ -97,6 +105,18 @@
             </p>
           </b-field>
         </ul>
+        <!-- 转发 Input -->
+        <b-field v-if="retweet.status" grouped type="is-light">
+          <b-input
+            v-model="retweet.quickInput"
+            placeholder="e.g. excited!"
+            size="is-small"
+            expanded
+          ></b-input>
+          <p class="control">
+            <b-button type="is-light" :disabled="retweet.quickInput.length===0" size="is-small">发表转发</b-button>
+          </p>
+        </b-field>
       </div>
     </article>
     <hr>
@@ -105,7 +125,7 @@
 
 <script>
 export default {
-  name: 'Tweet',
+  name: "Tweet",
   data() {
     return {
       tweet: {
@@ -114,72 +134,95 @@ export default {
       reply: {
         status: false,
         list: [],
-        quickInput: ''
+        quickInput: ""
+      },
+      retweet: {
+        status: false,
+        list: [],
+        quickInput: ""
       }
-    }
+    };
   },
   computed: {
     imageUrl() {
-      const isRetweet = this.tweet.type === 101
-      let retweetKey = null
-      const key = this.tweet.image
-      if (isRetweet) retweetKey = this.tweet.retweet.image
-      const param = `imageView2/0/q/75|watermark/1/image/aHR0cDovL3R3ZWV0LWNkbi56ZW5neGluZ2Z1LmNvbS9hc3NldHMvaW1hZ2V3YXRlcm1hcmtlX3YzLnBuZw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim`
+      const isRetweet = this.tweet.type === 101;
+      let retweetKey = null;
+      const key = this.tweet.image;
+      if (isRetweet) retweetKey = this.tweet.retweet.image;
+      const param = `imageView2/0/q/75|watermark/1/image/aHR0cDovL3R3ZWV0LWNkbi56ZW5neGluZ2Z1LmNvbS9hc3NldHMvaW1hZ2V3YXRlcm1hcmtlX3YzLnBuZw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim`;
       return {
         tweet: `${this.$qiniuHost}${key}?${param}`,
         retweet: isRetweet ? `${this.$qiniuHost}${retweetKey}?${param}` : null
-      }
+      };
     },
     createdTime() {
       const diff = this.$dayjs(new Date().getTime()).diff(
         this.tweet.created_at * 1000,
-        'day',
+        "day",
         true
-      )
+      );
       if (diff > 1) {
         return this.$dayjs(this.tweet.created_at * 1000).format(
-          'YYYY-MM-DD HH:mm:ss'
-        )
+          "YYYY-MM-DD HH:mm:ss"
+        );
       }
-      return this.$dayjs(this.tweet.created_at * 1000).fromNow()
+      return this.$dayjs(this.tweet.created_at * 1000).fromNow();
     }
   },
   props: {
     tid: Number
   },
   created() {
-    this.fetchData()
+    this.fetchData();
   },
   methods: {
     async fetchData() {
       try {
-        const response = await this.$request('/tweet/' + String(this.tid))
+        const response = await this.$request("/tweet/" + String(this.tid));
         if (response.data.success) {
-          this.tweet = response.data.data
+          this.tweet = response.data.data;
         }
       } catch (e) {
         this.$notification.open({
           duration: 5000,
           message: `获取广播列表失败！`,
-          position: 'is-top-right',
-          type: 'is-danger',
+          position: "is-top-right",
+          type: "is-danger",
           hasIcon: true
-        })
+        });
       }
     },
     async handlePublishReply() {},
+    async hanleDelete() {
+      window.confirm("确认删除这条广播?");
+    },
+    async handleLike() {
+      this.tweet.likes_count += 1;
+    },
     async hanleReply() {
-      this.reply.status = !this.reply.status
+      this.reply.status = !this.reply.status;
+      this.retweet.status = false;
       if (this.reply.status) {
         const resp = await this.$request(
-          '/tweet/' + String(this.tid) + '/reply'
-        )
+          "/tweet/" + String(this.tid) + "/reply"
+        );
         // console.log(resp.data)
-        this.reply.list = resp.data.list
+        this.reply.list = resp.data.list;
       }
+    },
+    async hanleRetweet() {
+      this.retweet.status = !this.retweet.status;
+      this.reply.status = false;
+      // if (this.reply.status) {
+      //   const resp = await this.$request(
+      //     "/tweet/" + String(this.tid) + "/reply"
+      //   );
+      //   // console.log(resp.data)
+      //   this.reply.list = resp.data.list;
+      // }
     }
   }
-}
+};
 </script>
 
 <style lang="css" scoped>
@@ -187,7 +230,8 @@ hr {
   height: 1px;
 }
 .tweet-pic img {
-  max-width: 75%;
+  max-width: 50%;
+  max-height: 300px;
 }
 .retweet-wrapper {
   padding: 1.5rem;
@@ -217,5 +261,9 @@ span.links:hover {
 }
 span.count {
   cursor: initial;
+}
+span.delete-tweet:hover {
+  background-color: hsl(348, 100%, 61%);
+  color: white;
 }
 </style>
