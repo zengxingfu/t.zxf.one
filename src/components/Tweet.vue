@@ -124,8 +124,9 @@
 </template>
 
 <script>
+import Bus from '../bus.js'
 export default {
-  name: "Tweet",
+  name: 'Tweet',
   data() {
     return {
       tweet: {
@@ -134,85 +135,89 @@ export default {
       reply: {
         status: false,
         list: [],
-        quickInput: ""
+        quickInput: ''
       },
       retweet: {
         status: false,
         list: [],
-        quickInput: ""
+        quickInput: ''
       }
-    };
+    }
   },
   computed: {
     imageUrl() {
-      const isRetweet = this.tweet.type === 101;
-      let retweetKey = null;
-      const key = this.tweet.image;
-      if (isRetweet) retweetKey = this.tweet.retweet.image;
-      const param = `imageView2/0/q/75|watermark/1/image/aHR0cDovL3R3ZWV0LWNkbi56ZW5neGluZ2Z1LmNvbS9hc3NldHMvaW1hZ2V3YXRlcm1hcmtlX3YzLnBuZw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim`;
+      const isRetweet = this.tweet.type === 101
+      let retweetKey = null
+      const key = this.tweet.image
+      if (isRetweet) retweetKey = this.tweet.retweet.image
+      const param = `imageView2/0/q/75|watermark/1/image/aHR0cDovL3R3ZWV0LWNkbi56ZW5neGluZ2Z1LmNvbS9hc3NldHMvaW1hZ2V3YXRlcm1hcmtlX3YzLnBuZw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim`
       return {
         tweet: `${this.$qiniuHost}${key}?${param}`,
         retweet: isRetweet ? `${this.$qiniuHost}${retweetKey}?${param}` : null
-      };
+      }
     },
     createdTime() {
       const diff = this.$dayjs(new Date().getTime()).diff(
         this.tweet.created_at * 1000,
-        "day",
+        'day',
         true
-      );
+      )
       if (diff > 1) {
         return this.$dayjs(this.tweet.created_at * 1000).format(
-          "YYYY-MM-DD HH:mm:ss"
-        );
+          'YYYY-MM-DD HH:mm:ss'
+        )
       }
-      return this.$dayjs(this.tweet.created_at * 1000).fromNow();
+      return this.$dayjs(this.tweet.created_at * 1000).fromNow()
     }
   },
   props: {
     tid: Number
   },
   created() {
-    this.fetchData();
+    this.fetchData()
   },
   methods: {
     async fetchData() {
       try {
-        const response = await this.$request("/tweet/" + String(this.tid));
+        const response = await this.$request('/tweet/' + String(this.tid))
         if (response.data.success) {
-          this.tweet = response.data.data;
+          this.tweet = response.data.data
         }
       } catch (e) {
         this.$notification.open({
           duration: 5000,
           message: `获取广播列表失败！`,
-          position: "is-top-right",
-          type: "is-danger",
+          position: 'is-top-right',
+          type: 'is-danger',
           hasIcon: true
-        });
+        })
       }
     },
     async handlePublishReply() {},
     async hanleDelete() {
-      window.confirm("确认删除这条广播?");
+      const result = window.confirm('确认删除这条广播?')
+      if (result) {
+        await this.$request.delete('/tweet/' + String(this.tid))
+        Bus.$emit('reload')
+      }
     },
     async handleLike() {
-      this.tweet.likes_count += 1;
+      this.tweet.likes_count += 1
     },
     async hanleReply() {
-      this.reply.status = !this.reply.status;
-      this.retweet.status = false;
+      this.reply.status = !this.reply.status
+      this.retweet.status = false
       if (this.reply.status) {
         const resp = await this.$request(
-          "/tweet/" + String(this.tid) + "/reply"
-        );
+          '/tweet/' + String(this.tid) + '/reply'
+        )
         // console.log(resp.data)
-        this.reply.list = resp.data.list;
+        this.reply.list = resp.data.list
       }
     },
     async hanleRetweet() {
-      this.retweet.status = !this.retweet.status;
-      this.reply.status = false;
+      this.retweet.status = !this.retweet.status
+      this.reply.status = false
       // if (this.reply.status) {
       //   const resp = await this.$request(
       //     "/tweet/" + String(this.tid) + "/reply"
@@ -222,7 +227,7 @@ export default {
       // }
     }
   }
-};
+}
 </script>
 
 <style lang="css" scoped>

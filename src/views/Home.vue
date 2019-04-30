@@ -16,13 +16,13 @@
 
 <script>
 // @ is an alias to /src
-import Hero from "@/components/Hero.vue";
-import TweetInput from "@/components/TweetInput.vue";
-import Footer from "@/components/Footer.vue";
-import Tweet from "@/components/Tweet.vue";
-
+import Hero from '@/components/Hero.vue'
+import TweetInput from '@/components/TweetInput.vue'
+import Footer from '@/components/Footer.vue'
+import Tweet from '@/components/Tweet.vue'
+import Bus from '../bus.js'
 export default {
-  name: "home",
+  name: 'home',
   components: {
     Hero,
     foot: Footer,
@@ -35,23 +35,26 @@ export default {
       limit: 10,
       total: 0,
       tweets: []
-    };
+    }
   },
   created() {
-    this.fetchData();
+    this.fetchData()
+    Bus.$on('reload', data => {
+      this.fetchData()
+    })
   },
   methods: {
     async fetchData() {
-      const resp = await this.$request.get("/tweet", {
+      const resp = await this.$request.get('/tweet', {
         params: {
           page: this.page
         }
-      });
-      this.tweets = resp.data.list;
-      this.total = resp.data.total;
+      })
+      this.tweets = resp.data.list
+      this.total = resp.data.total
     }
   }
-};
+}
 </script>
 
 <style scoped>
