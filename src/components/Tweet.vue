@@ -73,12 +73,13 @@
             >
               <span class="created_at">{{createdTime}}</span>
             </a>
-            <a class="level-item has-text-link" @click="hanleReply">
+            <a class="level-item has-text-link">
               <span
                 v-if="!reply.status"
                 class="links"
+                @click="handleReply"
               >{{tweet.replies_count ? tweet.replies_count : ''}}&nbsp;回应</span>
-              <span v-else class="links">隐藏回应</span>
+              <span v-else class="links" @click="hideReplyList">隐藏回应</span>
             </a>
             <a class="level-item has-text-link">
               <span class="links" @click="handleLike">赞</span>
@@ -95,7 +96,7 @@
                 v-if="tweet.retweets_count"
               >&nbsp;({{tweet.retweets_count}})</span>
             </a>
-            <a v-if="$GLOBAL.isLogin" class="level-item has-text-danger" @click="hanleDelete">
+            <a v-if="$GLOBAL.isLogin" class="level-item has-text-danger" @click="handleDelete">
               <span class="delete-tweet">删除</span>
             </a>
           </div>
@@ -109,7 +110,12 @@
           <b-field grouped>
             <b-input v-model="reply.quickInput" placeholder="e.g. 我跟他谈笑风生" size="is-small" expanded></b-input>
             <p class="control">
-              <b-button type="is-light" :disabled="reply.quickInput.length===0" size="is-small">发表回应</b-button>
+              <b-button
+                type="is-light"
+                :disabled="reply.quickInput.length===0"
+                size="is-small"
+                @click="publishQuickReply"
+              >发表回应</b-button>
             </p>
           </b-field>
         </ul>
@@ -122,7 +128,12 @@
             expanded
           ></b-input>
           <p class="control">
-            <b-button type="is-light" :disabled="retweet.quickInput.length===0" size="is-small">发表转发</b-button>
+            <b-button
+              type="is-light"
+              :disabled="retweet.quickInput.length===0"
+              size="is-small"
+              @click="publishRetweet"
+            >发表转发</b-button>
           </p>
         </b-field>
       </div>
@@ -203,8 +214,7 @@ export default {
         });
       }
     },
-    async handlePublishReply() {},
-    async hanleDelete() {
+    async handleDelete() {
       const result = window.confirm("确认删除这条广播?");
       if (result) {
         try {
@@ -221,8 +231,11 @@ export default {
     async handleLike() {
       this.tweet.likes_count += 1;
     },
-    async hanleReply() {
-      this.reply.status = !this.reply.status;
+    hideReplyList() {
+      this.reply.status = false;
+    },
+    async handleReply() {
+      this.reply.status = true;
       this.retweet.status = false;
       if (this.reply.status) {
         const resp = await this.$request(
@@ -236,7 +249,7 @@ export default {
       this.previewUrl = url;
       this.isImageModalActive = true;
     },
-    async hanleRetweet() {
+    hanleRetweet() {
       this.retweet.status = !this.retweet.status;
       this.reply.status = false;
       // if (this.reply.status) {
@@ -246,6 +259,55 @@ export default {
       //   // console.log(resp.data)
       //   this.reply.list = resp.data.list;
       // }
+    },
+    publishQuickReply() {
+      if (this.reply.quickInput.length > 0) {
+        const vm = this;
+        const params = new URLSearchParams();
+        params.append("content", vm.reply.quickInput);
+        params.append("from", WURFL.complete_device_name);
+        vm.$request
+          .post(`/tweet/${vm.tid}/reply`, params)
+          .then(res => {
+            if (res.data.success) {
+              // vm.reply.list.splice(0, 0, {
+              //   nickname: vm.$store.state.user.nickname,
+              //   email: vm.$store.state.user.email,
+              //   content: vm.reply.quickInput,
+              //   avatar: vm.$store.state.user.avatar
+              // });
+              vm.reply.quickInput = "";
+              // vm.tweet.replies += 1;
+              this.fetchData();
+              this.handleReply();
+            }
+          })
+          .catch(err => {
+            alert(err);
+          });
+      }
+    },
+    publishRetweet() {
+      if (this.retweet.quickInput.length > 0) {
+        if (this.$GLOBAL.isLogin) {
+          const params = new URLSearchParams();
+          params.append("content", this.retweet.quickInput);
+          params.append("from", WURFL.complete_device_name);
+          this.$request
+            .post(`/tweet/${this.tid}/retweet`, params)
+            .then(res => {
+              if (res.data.success) {
+                this.$router.push("/");
+                if (this.$route.name === "home") window.location.reload();
+              }
+            })
+            .catch(err => {
+              alert(err);
+            });
+        } else {
+          alert("你为什么想要转发呢？");
+        }
+      }
     }
   }
 };
