@@ -8,6 +8,8 @@
       rel="stylesheet"
       href="https://cdn.materialdesignicons.com/2.5.94/css/materialdesignicons.min.css"
     />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
     <!-- <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
@@ -25,7 +27,7 @@
       window.onload = loadScript;
     </script>
     <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
-    <title>tweet-ui</title>
+    <title>小广播</title>
   </head>
   <body>
     <noscript>
@@ -36,5 +38,18 @@
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-81723127-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "UA-81723127-4");
+    </script>
   </body>
 </html>
