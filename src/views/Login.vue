@@ -86,9 +86,9 @@ export default {
     };
   },
   beforeMount() {
-    // if (this.$store.state.isLogin) {
-    //   this.$router.push("/");
-    // }
+    if (this.$GLOBAL.isLogin) {
+      this.$router.push("/");
+    }
   },
   methods: {
     checkUsername() {
