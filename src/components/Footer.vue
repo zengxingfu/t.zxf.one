@@ -1,5 +1,6 @@
 <template>
-  <footer class="footer has-background-white-ter">
+  <footer class="footer has-background-white">
+    <hr>
     <div class="container has-text-left is-size-65">
       <p>
         © 2018 – 2019 ❤️
@@ -22,5 +23,12 @@
 <style scoped>
 a:hover {
   text-decoration: underline;
+}
+hr {
+  height: 1px;
+}
+.footer > .container {
+  padding-top: 0;
+  padding-bottom: 0;
 }
 </style>

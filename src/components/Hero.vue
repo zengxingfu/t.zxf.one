@@ -3,14 +3,20 @@
     <div class="top-bar has-background-grey-dark is-size-7">
       <nav>
         <ul>
-          <a href="https://reader.zxf.one">
-            <li>READER</li>
+          <a target="_blank" href="https://zxf.one">
+            <li>学习一个</li>
           </a>
-          <a href="https://zxf.one">
-            <li>BLOG</li>
+          <a target="_blank" href="https://instagram.com/zengxingfu">
+            <li>INS</li>
           </a>
-          <a class="right-nav">
+          <a target="_blank" href="https://f64.club/">
+            <li>F64 CLUB</li>
+          </a>
+          <a v-if="!$GLOBAL.isLogin" class="right-nav" @click="$router.push('/login')">
             <li>LOGIN</li>
+          </a>
+          <a v-else class="right-nav" @click="handleLogout">
+            <li>LOGOUT</li>
           </a>
           <!-- <b-dropdown class="right-nav" position="is-right" aria-role="list">
             <li class="right-li" slot="trigger">登录</li>
@@ -32,7 +38,17 @@
 </template>
 
 <script>
-export default {}
+export default {
+  methods: {
+    handleLogout() {
+      if (window.confirm("确定要登出吗？")) {
+        localStorage.removeItem("access_token");
+        localStorage.removeItem("_userid");
+        window.location.reload();
+      }
+    }
+  }
+};
 </script>
 <style lang="css" scoped>
 .top-bar {
@@ -59,5 +75,9 @@ export default {}
 }
 .top-bar li:hover {
   color: hsl(0, 0%, 98%);
+}
+.hero-body > .container {
+  padding-top: 0;
+  padding-bottom: 0;
 }
 </style>

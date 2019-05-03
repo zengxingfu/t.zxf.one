@@ -36,145 +36,148 @@
 
 <script>
 // import MobileDetect from 'mobile-detect';
-import Bus from '../bus.js'
+import Bus from "../bus.js";
 export default {
   data() {
     return {
       publishing: false,
       payload: {
-        content: '',
+        content: "",
         image: null,
         fileName: null,
-        uploadToken: '',
+        uploadToken: "",
         uploading: false,
         addLocation: false,
-        locationDisplay: '正在定位……'
+        locationDisplay: "正在定位……"
       }
-    }
+    };
   },
   computed: {
     uploadAreaDisplay() {
-      if (!this.payload.fileName) return '等待添加图片'
+      if (!this.payload.fileName) return "等待添加图片";
       if (this.payload.fileName && this.payload.uploading)
-        return '上传中，请等待……'
-      if (this.payload.image) return '上传成功！'
+        return "上传中，请等待……";
+      if (this.payload.image) return "上传成功！";
     }
   },
   methods: {
     handleLocate(e) {
       // console.log(e.target.checked);
-      const vm = this
+      const vm = this;
       function getAddress(longitude, latitude) {
-        var myGeo = new BMap.Geocoder()
+        var myGeo = new BMap.Geocoder();
         // 根据坐标得到地址描述
         myGeo.getLocation(new BMap.Point(longitude, latitude), function(
           result
         ) {
           if (result) {
             // alert(result.address);
-            vm.payload.locationDisplay = result.address
+            vm.payload.locationDisplay = result.address;
           } else {
-            vm.payload.locationDisplay = null
+            vm.payload.locationDisplay = null;
           }
-        })
+        });
       }
       if (this.payload.addLocation) {
-        const geolocation = new BMap.Geolocation()
+        const geolocation = new BMap.Geolocation();
         // 开启SDK辅助定位
-        geolocation.enableSDKLocation()
+        geolocation.enableSDKLocation();
         geolocation.getCurrentPosition(function(r) {
           if (this.getStatus() == BMAP_STATUS_SUCCESS) {
             // alert("您的位置：" + r.point.lng + "," + r.point.lat);
-            getAddress(r.point.lng, r.point.lat)
+            getAddress(r.point.lng, r.point.lat);
           } else {
-            alert('failed' + this.getStatus())
-            vm.payload.locationDisplay = null
+            alert("failed" + this.getStatus());
+            vm.payload.locationDisplay = null;
           }
-        })
+        });
       }
     },
     uploadImage(file, token) {
-      const formdata = new FormData()
-      formdata.append('file', file)
-      formdata.append('token', token)
-      this.payload.uploading = true
+      const formdata = new FormData();
+      formdata.append("file", file);
+      formdata.append("token", token);
+      this.payload.uploading = true;
       this.$upload({
-        url: 'https://up-z1.qiniup.com/',
-        method: 'post',
+        url: "https://up-z1.qiniup.com/",
+        method: "post",
         data: formdata
       })
         .then(res => {
           // console.log(res.data)
-          this.payload.image = res.data.key
-          this.payload.uploading = false
+          this.payload.image = res.data.key;
+          this.payload.uploading = false;
         })
         .catch(err => {
-          alert(err.message)
-          this.payload.uploading = false
-        })
+          alert(err.message);
+          this.payload.uploading = false;
+        });
     },
     handleImageLoad(e) {
-      const file = e.target.files[0]
+      const file = e.target.files[0];
       // console.log(file)
-      const allowTypes = ['image/png', 'image/jpeg', 'image/gif']
+      const allowTypes = ["image/png", "image/jpeg", "image/gif"];
       if (allowTypes.indexOf(file.type) >= 0) {
         // get upload token
-        this.payload.fileName = file['name']
+        this.payload.fileName = file["name"];
         this.$request
-          .get('/upload/token')
+          .get("/upload/token")
           .then(res => {
             if (res.data.success === 1) {
-              const token = res.data.token
-              this.uploadImage(file, token)
+              const token = res.data.token;
+              this.uploadImage(file, token);
             }
           })
           .catch(err => {
-            alert(err.message)
-          })
+            alert(err.message);
+          });
       } else {
-        alert('请选择图片文件上传！')
+        alert("请选择图片文件上传！");
       }
     },
     publish() {
       if (this.payload.content.length > 0) {
         // 上传图片
         if (this.payload.fileName && !this.payload.image) {
-          alert('图片上传中，请等待……')
-          return false
+          alert("图片上传中，请等待……");
+          return false;
         }
-        const vm = this
-        vm.publishing = true
-        const params = new URLSearchParams()
-        params.append('content', vm.payload.content)
-        params.append('from', WURFL.complete_device_name)
-        if (vm.payload.image) params.append('image', vm.payload.image)
+        const vm = this;
+        vm.publishing = true;
+        const params = new URLSearchParams();
+        params.append("content", vm.payload.content);
+        params.append("from", WURFL.complete_device_name);
+        if (vm.payload.image) params.append("image", vm.payload.image);
         if (vm.payload.addLocation)
-          params.append('location', vm.payload.locationDisplay)
+          params.append("location", vm.payload.locationDisplay);
         vm.$request
-          .post('/tweet', params)
+          .post("/tweet", params)
           .then(result => {
             if (result.data.success === 1) {
-              vm.payload.content = ''
-              vm.payload.image = null
-              vm.publishing = false
-              vm.payload.fileName = null
-              vm.payload.addLocation = false
-              vm.$router.push('/')
-              Bus.$emit('reload')
+              vm.payload.content = "";
+              vm.payload.image = null;
+              vm.publishing = false;
+              vm.payload.fileName = null;
+              vm.payload.addLocation = false;
+              vm.$router.push("/");
+              Bus.$emit("reload");
             }
           })
           .catch(err => {
-            vm.publishing = false
+            vm.publishing = false;
             // console.log(err);
-            alert(err.message)
-          })
+            alert(err.message);
+          });
       }
     }
   }
-}
+};
 </script>
 
 <style scoped>
+.input-wrapper {
+  margin-bottom: 2rem;
+}
 .input-wrapper .label,
 textarea {
   font-size: 0.875rem;

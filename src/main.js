@@ -2,7 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import Buefy from "buefy";
 import "buefy/dist/buefy.css";
-// import "@/assets/style/customization.scss"
+import "@/assets/style/customization.scss";
 import axios from "axios";
 import router from "./router";
 // dayjs
@@ -12,11 +12,14 @@ dayjs.locale("zh-cn");
 import relativeTime from "dayjs/plugin/relativeTime";
 dayjs.extend(relativeTime);
 Vue.prototype.$dayjs = dayjs;
-
+// 全局数据
+Vue.prototype.$GLOBAL = {
+  isLogin: false
+};
 Vue.use(Buefy);
 Vue.config.productionTip = false;
 const request = axios.create({
-  baseURL: "http://tiny-tweet.zengxingfu.com"
+  baseURL: "https://tiny-tweet.zengxingfu.com"
 });
 request.defaults.headers.common["Authorization"] = localStorage.getItem(
   "access_token"
