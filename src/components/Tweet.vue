@@ -228,8 +228,9 @@ export default {
         }
       }
     },
-    async handleLike() {
+    handleLike() {
       this.tweet.likes_count += 1;
+      this.$request.post(`/tweet/${this.tid}/like`)
     },
     hideReplyList() {
       this.reply.status = false;
