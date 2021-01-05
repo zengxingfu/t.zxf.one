@@ -4,7 +4,7 @@
     "build": "rm ../coding.net/t.zxf.one/*.js ../coding.net/t.zxf.one/*.map ../coding.net/t.zxf.one/*.css ../coding.net/t.zxf.one/*.html && parcel build index.html --detailed-report --out-dir ../coding.net/t.zxf.one --public-url ./"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "bulma": "^0.7.2",
     "dayjs": "^1.7.7",
     "mobile-detect": "^1.4.3",
